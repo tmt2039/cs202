@@ -1,0 +1,14 @@
+package csc202.fibnum;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class ReFibNumTest {
+	@Test
+	public void testFib() {
+		ReFibNum reFibNum = new ReFibNum();
+		long fib = reFibNum.fib(7);
+		assertEquals(7, fib);
+	}
+}

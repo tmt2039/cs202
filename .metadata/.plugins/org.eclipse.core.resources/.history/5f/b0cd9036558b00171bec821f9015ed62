@@ -1,0 +1,17 @@
+package cs202.fibnum.gui;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ComputeFibonacciTest {
+    private Object index = 4;
+
+    @Test
+   public  void main() {
+    }
+
+    @Test
+   public  void fib() throws Exception {
+        System.out.println(fib.fib(index));
+    }
+
+}
