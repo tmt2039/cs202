@@ -2,6 +2,11 @@ package cs202.fibnum.gui;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author Administrator
+ *
+ */
 public class ComputeFibonacci {
 	public static String response;
 
