@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="653.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SignUpController">
    <children>
       <Label layoutX="288.0" layoutY="14.0" text="Sign Up Page">
          <font>
@@ -13,33 +13,34 @@
          </font>
       </Label>
       <Label layoutX="14.0" layoutY="71.0" text="First Name" />
-      <TextField layoutX="98.0" layoutY="66.0" />
+      <TextField fx:id="firstName" layoutX="98.0" layoutY="66.0" />
       <Label layoutX="377.0" layoutY="71.0" text="Last Name" />
-      <TextField layoutX="467.0" layoutY="66.0" />
-      <TextField layoutX="98.0" layoutY="119.0" promptText="555-555-5555" text="   -   -" />
+      <TextField fx:id="lastName" layoutX="467.0" layoutY="66.0" />
+      <TextField fx:id="sSN" layoutX="98.0" layoutY="119.0" promptText="555-555-5555" text="   -   -" />
       <Label layoutX="21.0" layoutY="124.0" text="SSN" />
       <Label layoutX="377.0" layoutY="188.0" text="gender (M or F)" />
-      <TextField layoutX="517.0" layoutY="183.0" prefHeight="31.0" prefWidth="28.0" />
+      <TextField fx:id="gender" layoutX="517.0" layoutY="183.0" prefHeight="31.0" prefWidth="28.0" />
       <Label layoutX="380.0" layoutY="124.0" text="Birthday" />
       <Label layoutX="17.0" layoutY="256.0" text="email" />
-      <TextField layoutX="74.0" layoutY="251.0" promptText="include @mail" />
-      <TextField layoutX="131.0" layoutY="183.0" prefHeight="31.0" prefWidth="152.0" text="(   )   -" />
+      <TextField fx:id="email" layoutX="74.0" layoutY="251.0" promptText="include @mail" />
+      <TextField fx:id="phoneNum" layoutX="131.0" layoutY="183.0" prefHeight="31.0" prefWidth="152.0" text="(   )   -" />
       <Label layoutX="25.0" layoutY="188.0" text="phone number" />
       <Label layoutX="229.0" layoutY="373.0" text="username" />
-      <TextField layoutX="336.0" layoutY="368.0" />
+      <TextField fx:id="userName" layoutX="336.0" layoutY="368.0" />
       <Label layoutX="21.0" layoutY="353.0" prefHeight="30.0" prefWidth="159.0" text="password requirement:" />
       <Text layoutX="24.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 number" />
       <Text layoutX="24.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 lowercase letter" />
       <Text layoutX="24.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 Uppercase letter" />
       <Text layoutX="24.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 special character" />
-      <PasswordField layoutX="324.0" layoutY="448.0" promptText="password" />
-      <PasswordField layoutX="324.0" layoutY="496.0" promptText="confirm password" />
+      <PasswordField fx:id="password" layoutX="324.0" layoutY="448.0" promptText="password" />
+      <PasswordField fx:id="confirmPassword" layoutX="324.0" layoutY="496.0" promptText="confirm password" />
       <Label layoutX="228.0" layoutY="452.0" text=" password" />
       <Label layoutX="180.0" layoutY="501.0" text="confirm password" />
-      <Button layoutX="314.0" layoutY="551.0" mnemonicParsing="false" text="sign up" />
+      
+      <Button layoutX="314.0" layoutY="551.0" mnemonicParsing="false" onAction="#signUpButtonHandle" text="sign up" />
+      <Button layoutX="500.0" layoutY="251.0" mnemonicParsing="false" onAction="#browseButtonHandle" text="Browse" />      
+      
       <Hyperlink layoutX="324.0" layoutY="592.0" text="log in" />
-      <DatePicker layoutX="467.0" layoutY="119.0" prefHeight="31.0" prefWidth="205.0" />
-      <Button layoutX="485.0" layoutY="251.0" mnemonicParsing="false" text="Browse" />
-      <Pane layoutX="460.0" layoutY="219.0" prefHeight="134.0" prefWidth="187.0" />
+      <DatePicker fx:id="birthdate" layoutX="467.0" layoutY="119.0" prefHeight="31.0" prefWidth="205.0" />
    </children>
 </AnchorPane>
