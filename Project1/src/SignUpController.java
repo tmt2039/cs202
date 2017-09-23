@@ -6,11 +6,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class SignUpController {
@@ -62,19 +64,18 @@ public class SignUpController {
 
 	public boolean firstNameChecker() {
 
-		String NotLetters = "\\d,\\b";
+		String NotLetters = "\\d";
 		Pattern checkLetter = Pattern.compile(firstName.getText());
 		Matcher regexMatcher = checkLetter.matcher(NotLetters);
 		boolean checker = false;
 		if (firstName == null || firstName.equals("")) {
 			Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error Dialog");
-		alert.setHeaderText("First name");
-		alert.setContentText("No numbers or special characters .");
-		alert.showAndWait();
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("First name");
+			alert.setContentText("Please type in your last name");
+			alert.showAndWait();
 			checker = false;
-		}
-		else if (firstName.getText().contains(NotLetters)) {
+		} else if (firstName.getText().contains(NotLetters)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("First name");
@@ -84,16 +85,24 @@ public class SignUpController {
 		}
 
 		checker = true;
+		//User firstName = new User (firstName.getText());
 
 		return checker;
 
 	}
 
 	public boolean lastNameChecker() {
-		String numS = "\\d,\\b";
+		String numS = "\\d";
 		Pattern checkLetter = Pattern.compile(lastName.getText());
 		Matcher regexMatcher = checkLetter.matcher(numS);
-		if (lastName.getText().contains(numS)) {
+		if (lastName == null || lastName.equals("")) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Last name");
+			alert.setContentText("Please type in your last name");
+			alert.showAndWait();
+			return false;
+		} else if (lastName.getText().contains(numS)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Last name");
@@ -197,14 +206,15 @@ public class SignUpController {
 
 	public void passwordChecker() {
 		// "\\w{1,}, \\d{1,}, \\b{1,}"
-		String passwordRequirement = "\\w+, \\d+, \\b+ ";
+		String passwordRequirement = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$ ";
 		Pattern checkPassword = Pattern.compile(password.getText());
 		Matcher regexMatcher = checkPassword.matcher(passwordRequirement);
 		if (!password.getText().contains(passwordRequirement)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Your password does not contain one of these items:");
-			alert.setContentText("1 number\n 1 upper case letter\n 1 lower case letter\n 1 special character");
+			alert.setContentText(
+					"1 number\n 1 upper case letter\n 1 lower case letter\n 1 special character\n and at least 8 characters");
 			alert.showAndWait();
 		}
 	}
@@ -233,10 +243,13 @@ public class SignUpController {
 	}
 
 	public void browseButtonHandle() {
-		// Stage primaryStage = (Stage) ((Button)
-		// actionEvent.getSource()).getScene().getWindow();
-		System.out.println("file chooser...");
+		
+		//(ActionEvent actionEvent)
 		// FileChooser fileChooser = new FileChooser();
+		// Stage primaryStage =
+		// (Stage) ( actionEvent.getSource()).getScene().getWindow();
+		System.out.println("file chooser...");
+		//
 		// fileChooser.setTitle("Open Resource File");
 		// fileChooser.showOpenDialog(signupStage);
 	}
