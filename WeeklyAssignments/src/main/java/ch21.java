@@ -37,7 +37,9 @@ public class ch21 {
 		set1.add("Kevin");
 		set1.add("Michelle");
 		set1.add("Ryan");
+		
 		System.out.println("Set 2: " + set2);
+		
 		union(set1, set2);
 		differences(set1, set2);
 		intersection(set1, set2);

@@ -85,13 +85,14 @@ public class SignUpController {
 		}
 
 		checker = true;
-		//User firstName = new User (firstName.getText());
+		// User firstName = new User (firstName.getText());
 
 		return checker;
 
 	}
 
 	public boolean lastNameChecker() {
+		boolean checker;
 		String numS = "\\d";
 		Pattern checkLetter = Pattern.compile(lastName.getText());
 		Matcher regexMatcher = checkLetter.matcher(numS);
@@ -101,7 +102,7 @@ public class SignUpController {
 			alert.setHeaderText("Last name");
 			alert.setContentText("Please type in your last name");
 			alert.showAndWait();
-			return false;
+			checker = false;
 		} else if (lastName.getText().contains(numS)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
@@ -109,13 +110,15 @@ public class SignUpController {
 			alert.setContentText("No numbers or special characters .");
 
 			alert.showAndWait();
-			return false;
-		} else
-			return true;
+			checker = false;
+		} else {
+			checker = true;
+		}
+		return checker;
 	}
 
-	public void genderChecker() {
-
+	public boolean genderChecker() {
+		boolean checker;
 		if (gender.getText().equals(null)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
@@ -124,7 +127,7 @@ public class SignUpController {
 			alert.setContentText("M is for male and F is for female");
 
 			alert.showAndWait();
-
+			checker = false;
 		}
 		if (!gender.getText().equalsIgnoreCase("f") && !gender.getText().equalsIgnoreCase("m")) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -133,6 +136,7 @@ public class SignUpController {
 			alert.setContentText("Please type in 'm' for male and 'f' for female");
 
 			alert.showAndWait();
+			checker = false;
 
 		} else if (gender.getText().length() > 1) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -142,12 +146,16 @@ public class SignUpController {
 			alert.setContentText("M is for male and F is for female");
 
 			alert.showAndWait();
-
+			checker = false;
+		} else {
+			checker = true;
 		}
+		return checker;
 
 	}
 
-	public void emailChecker() {
+	public boolean emailChecker() {
+		boolean checker;
 		if (email.getText().equals(null)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
@@ -155,6 +163,7 @@ public class SignUpController {
 			alert.setContentText("Please type in your email in this format: XXX@mail.XXX");
 
 			alert.showAndWait();
+			checker = false;
 		} else if (!email.getText().contains("@mail.")) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
@@ -162,11 +171,16 @@ public class SignUpController {
 			alert.setContentText("Please type in your email in this format: XXX@mail.XXX");
 
 			alert.showAndWait();
-
+			checker = false;
+		} else {
+			checker = true;
 		}
+		return checker;
+
 	}
 
-	public void sSNChecker() {
+	public boolean sSNChecker() {
+		boolean checker;
 		String letters = "[A-Z a-z]";
 		Pattern checkLetter = Pattern.compile(sSN.getText());
 		Matcher regexMatcher = checkLetter.matcher(letters);
@@ -176,16 +190,22 @@ public class SignUpController {
 			alert.setHeaderText("Has letters in it");
 			alert.setContentText("SSN only has numbers");
 			alert.showAndWait();
+			checker = false;
 		} else if (sSN.getText().length() > 12 || sSN.getText().length() < 12) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Not the right amount number");
 			alert.setContentText("SSN format is: ###-###-####");
 			alert.showAndWait();
+			checker = false;
+		} else {
+			checker = true;
 		}
+		return checker;
 	}
 
-	public void phoneNumberChecker() {
+	public boolean phoneNumberChecker() {
+
 		String letters = "[A-Z a-z]";
 		Pattern checkLetter = Pattern.compile(phoneNum.getText());
 		Matcher regexMatcher = checkLetter.matcher(letters);
@@ -195,18 +215,24 @@ public class SignUpController {
 			alert.setHeaderText("Has letters in it");
 			alert.setContentText("phone numbers only has numbers");
 			alert.showAndWait();
+			return false;
 		} else if (phoneNum.getText().length() > 12 || phoneNum.getText().length() < 12) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Not the right amount number");
 			alert.setContentText("phone number format is: ###-###-####");
 			alert.showAndWait();
+			return false;
+		} else {
+			return true;
 		}
+
 	}
 
-	public void passwordChecker() {
+	public boolean passwordChecker() {
 		// "\\w{1,}, \\d{1,}, \\b{1,}"
-		String passwordRequirement = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$ ";
+
+		String passwordRequirement = "(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=.\\S+$).{8,}";
 		Pattern checkPassword = Pattern.compile(password.getText());
 		Matcher regexMatcher = checkPassword.matcher(passwordRequirement);
 		if (!password.getText().contains(passwordRequirement)) {
@@ -216,21 +242,29 @@ public class SignUpController {
 			alert.setContentText(
 					"1 number\n 1 upper case letter\n 1 lower case letter\n 1 special character\n and at least 8 characters");
 			alert.showAndWait();
+			return false;
+		} else {
+			return true;
 		}
 	}
 
-	public void confirmPasswordChecker() {
-		if (!confirmPassword.getText().matches(password.getText())) {
+	public boolean confirmPasswordChecker() {
+
+		if (!confirmPassword.getText().equals(password.getText())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Your confirm password does match");
 			alert.setContentText("your confirm password does not match with password please try again");
 			alert.showAndWait();
+			return false;
+		} else {
+			return true;
 		}
+
 	}
 
 	public void signUpButtonHandle() {
-
+		boolean checker = true;
 		firstNameChecker();
 		genderChecker();
 		emailChecker();
@@ -238,19 +272,30 @@ public class SignUpController {
 		phoneNumberChecker();
 		passwordChecker();
 		confirmPasswordChecker();
+		if (checker = true) {
+			// System.out.println("first name = " + firstName.getText());
+			// System.out.println("birthdate = " + birthdate.getValue());
+			// System.out.println("last name= " + lastName.getText());
+			// System.out.println("SSN= " + sSN.getText());
+			// System.out.println("gender=" + gender.getText());
+			// System.out.println("email= " + email.getText());
+			// System.out.println("phone number = " + phoneNum.getText());
+			// System.out.println("username = " + userName.getText());
+			// System.out.println("password = " + password.getText());
+			// System.out.println("confirm password = " + confirmPassword.getText());
+		}
+
 		User user = new User(userName.getText(), password.getText());
 
 	}
 
-	public void browseButtonHandle() {
-		
-		//(ActionEvent actionEvent)
-		// FileChooser fileChooser = new FileChooser();
-		// Stage primaryStage =
-		// (Stage) ( actionEvent.getSource()).getScene().getWindow();
+	public void browseButtonHandle(ActionEvent actionEvent) {
+
+		FileChooser fileChooser = new FileChooser();
+		Stage primaryStage = (Stage) (actionEvent.getSource()).getScene().getWindow();
 		System.out.println("file chooser...");
-		//
-		// fileChooser.setTitle("Open Resource File");
-		// fileChooser.showOpenDialog(signupStage);
+
+		fileChooser.setTitle("Open Resource File");
+		fileChooser.showOpenDialog(signupStage);
 	}
 }
