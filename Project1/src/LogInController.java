@@ -28,12 +28,12 @@ import javafx.stage.Stage;
 public class LogInController extends Application {
 
 	@FXML
-	TextField userName;
+	TextField userNLog;
 
 	@FXML
-	PasswordField password;
+	PasswordField passwLog;
 	
-	@FXML
+	
 	Button logInHandle;
 
 	public void start(Stage stage) {
@@ -51,22 +51,11 @@ public class LogInController extends Application {
 		}
 	}
 	
-	public void signUpLinkHandle() throws Exception {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error Dialog");
-		alert.setHeaderText("UserName");
-		alert.setContentText("No numbers or special characters.");
-		alert.showAndWait();
-		System.out.println("UserName : " + userName.getText());
-		System.out.println("Password : " + password.getText());
-		User user = new User(userName.getText(), password.getText());
+	public void signUpLinkHandle()  {
 
 	}
 	
-	public void logInButtonHandle() {
-		System.out.println("UserName : " + userName.getText());
-		System.out.println("Password : " +password.getText());
-	}
+	
 
 
 	public static void main(String[] args) {

@@ -48,8 +48,15 @@ public class SignUpController {
 	@FXML
 	PasswordField confirmPassword;
 
+	@FXML
+	TextField userNLog;
+
+	@FXML
+	PasswordField passwLog;
+
 	Stage signupStage = null;
 	private static List<User> users = new ArrayList<User>();
+	private static List<Person> person = new ArrayList<Person>();
 
 	public void signUpLinkHandle() {
 		signupStage = new Stage();
@@ -78,7 +85,7 @@ public class SignUpController {
 			return false;
 		}
 		return true;
-	
+
 	}
 
 	public boolean lastNameChecker() {
@@ -239,8 +246,6 @@ public class SignUpController {
 		return true;
 	}
 
-	
-
 	public boolean confirmPasswordChecker() {
 
 		if (!confirmPassword.getText().equals(password.getText())) {
@@ -257,6 +262,7 @@ public class SignUpController {
 	}
 
 	public void signUpButtonHandle() {
+		logInButtonHandle();
 		System.out.println("users: " + users.size());
 		firstNameChecker();
 		genderChecker();
@@ -267,7 +273,11 @@ public class SignUpController {
 		confirmPasswordChecker();
 		browseButtonHandle();
 		birthDate();
+		
+		Person person = new Person(firstName.getText(), lastName.getText(), gender.getText(), sSN.getText(),
+				birthdate.getValue().toString());
 		User user = new User(userName.getText(), password.getText());
+		user.setPerson(person);
 		user.setEmail(email.getText());
 
 		user.setPassword(password.getText()); // more here
@@ -299,6 +309,31 @@ public class SignUpController {
 		if (file != null) {
 			System.out.println("File: " + file.getAbsolutePath());
 
+		}
+
+	}
+
+	public void logInButtonHandle() {
+		for (User theUser : users) {
+			if (theUser.getUserN().equals(userNLog.getText())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Username ");
+				alert.setContentText("Wrong Username or does not exist.");
+				alert.showAndWait();
+			} else if (theUser.getUserN().equals(passwLog.getText())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Password ");
+				alert.setContentText("Wrong password or does not exist.");
+				alert.showAndWait();
+			} else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText("Welcome ");
+				alert.setContentText("Have a nice day.");
+				alert.showAndWait();
+			}
 		}
 
 	}
