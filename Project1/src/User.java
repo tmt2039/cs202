@@ -54,10 +54,7 @@ public class User {
 		return "User(" + "email='" + email + '\'' + ", userN='" + userName + '\'' + ", password='" + password + '\''
 				+ ", photo=' " + photo + '\'' + ", phone='" + phone + '}';
 	}
-//	public void PrintUser() {
-//		System.out.println("User : " + userName);
-//		System.out.println(" first name: ");
-//	}
+
 	public Person getPerson() {
 		return person;
 	}
@@ -65,4 +62,6 @@ public class User {
 	public void setPerson(Person person) {
 		this.person = person;
 	}
+
+	
 }

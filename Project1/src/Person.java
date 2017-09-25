@@ -49,7 +49,7 @@ public class Person {
 		return dOB;
 	}
 
-	public void setdOB(String dOB) {
+	public  void setdOB(String dOB) {
 		this.dOB = dOB;
 	}
 

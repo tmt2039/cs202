@@ -1,12 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.*;
 import java.awt.Button;
-import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
@@ -47,6 +49,7 @@ public class SignUpController {
 	PasswordField confirmPassword;
 
 	Stage signupStage = null;
+	private static List<User> users = new ArrayList<User>();
 
 	public void signUpLinkHandle() {
 		signupStage = new Stage();
@@ -63,39 +66,26 @@ public class SignUpController {
 	}
 
 	public boolean firstNameChecker() {
-
-		String NotLetters = "\\d";
-		Pattern checkLetter = Pattern.compile(firstName.getText());
-		Matcher regexMatcher = checkLetter.matcher(NotLetters);
-		boolean checker = false;
-		if (firstName == null || firstName.equals("")) {
+		String regex = "[A-Z][a-z]+";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher regexMatcher = pattern.matcher(this.firstName.getText());
+		if (!regexMatcher.matches()) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("First name");
-			alert.setContentText("Please type in your last name");
+			alert.setContentText("No numbers or special characters.");
 			alert.showAndWait();
-			checker = false;
-		} else if (firstName.getText().contains(NotLetters)) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error Dialog");
-			alert.setHeaderText("First name");
-			alert.setContentText("No numbers or special characters .");
-			alert.showAndWait();
-			checker = false;
+			return false;
 		}
-
-		checker = true;
-		// User firstName = new User (firstName.getText());
-
-		return checker;
-
+		return true;
+	
 	}
 
 	public boolean lastNameChecker() {
 		boolean checker;
-		String numS = "\\d";
+		String letters = "[a-zA-z]+";
 		Pattern checkLetter = Pattern.compile(lastName.getText());
-		Matcher regexMatcher = checkLetter.matcher(numS);
+		Matcher regexMatcher = checkLetter.matcher(letters);
 		if (lastName == null || lastName.equals("")) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
@@ -103,7 +93,7 @@ public class SignUpController {
 			alert.setContentText("Please type in your last name");
 			alert.showAndWait();
 			checker = false;
-		} else if (lastName.getText().contains(numS)) {
+		} else if (!lastName.getText().contains(letters)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Last name");
@@ -179,6 +169,10 @@ public class SignUpController {
 
 	}
 
+	public void birthDate() {
+		String birthday = birthdate.getValue().toString();
+	}
+
 	public boolean sSNChecker() {
 		boolean checker;
 		String letters = "[A-Z a-z]";
@@ -230,23 +224,22 @@ public class SignUpController {
 	}
 
 	public boolean passwordChecker() {
-		// "\\w{1,}, \\d{1,}, \\b{1,}"
 
-		String passwordRequirement = "(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=.\\S+$).{8,}";
-		Pattern checkPassword = Pattern.compile(password.getText());
-		Matcher regexMatcher = checkPassword.matcher(passwordRequirement);
-		if (!password.getText().contains(passwordRequirement)) {
+		String regex = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher regexMatcher = pattern.matcher(password.getText());
+		if (!regexMatcher.matches()) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Your password does not contain one of these items:");
-			alert.setContentText(
-					"1 number\n 1 upper case letter\n 1 lower case letter\n 1 special character\n and at least 8 characters");
+			alert.setContentText("1 number\n 1 upper case letter\n 1 lower case letter\n 1 special character");
 			alert.showAndWait();
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
+
+	
 
 	public boolean confirmPasswordChecker() {
 
@@ -264,7 +257,7 @@ public class SignUpController {
 	}
 
 	public void signUpButtonHandle() {
-		boolean checker = true;
+		System.out.println("users: " + users.size());
 		firstNameChecker();
 		genderChecker();
 		emailChecker();
@@ -272,30 +265,41 @@ public class SignUpController {
 		phoneNumberChecker();
 		passwordChecker();
 		confirmPasswordChecker();
-		if (checker = true) {
-			// System.out.println("first name = " + firstName.getText());
-			// System.out.println("birthdate = " + birthdate.getValue());
-			// System.out.println("last name= " + lastName.getText());
-			// System.out.println("SSN= " + sSN.getText());
-			// System.out.println("gender=" + gender.getText());
-			// System.out.println("email= " + email.getText());
-			// System.out.println("phone number = " + phoneNum.getText());
-			// System.out.println("username = " + userName.getText());
-			// System.out.println("password = " + password.getText());
-			// System.out.println("confirm password = " + confirmPassword.getText());
-		}
-
+		browseButtonHandle();
+		birthDate();
 		User user = new User(userName.getText(), password.getText());
+		user.setEmail(email.getText());
+
+		user.setPassword(password.getText()); // more here
+
+		boolean duplicated = false;
+		for (User theUser : users) {
+			if (theUser.getUserN().equals(userName.getText())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Username is taken");
+				alert.setContentText("Please type in a different username.");
+				alert.showAndWait();
+				duplicated = true;
+				break;
+			}
+		}
+		if (!duplicated) {
+			users.add(user);
+		}
 
 	}
 
-	public void browseButtonHandle(ActionEvent actionEvent) {
+	public void browseButtonHandle() {
 
-		FileChooser fileChooser = new FileChooser();
-		Stage primaryStage = (Stage) (actionEvent.getSource()).getScene().getWindow();
 		System.out.println("file chooser...");
-
+		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
-		fileChooser.showOpenDialog(signupStage);
+		File file = fileChooser.showOpenDialog(signupStage);
+		if (file != null) {
+			System.out.println("File: " + file.getAbsolutePath());
+
+		}
+
 	}
 }

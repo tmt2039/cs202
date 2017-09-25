@@ -15,9 +15,9 @@
       </Label>
       <Label layoutX="35.0" layoutY="58.0" text="Username" />
       <Label layoutX="35.0" layoutY="102.0" text="Password" />
-      <TextField  layoutX="113.0" layoutY="53.0" />
-      <TextField  layoutX="113.0" layoutY="97.0" />
-      <Button layoutX="162.0" layoutY="143.0" mnemonicParsing="false" text="log in" />
+      <TextField fx:id="userName" layoutX="113.0" layoutY="53.0" />
+      <PasswordField fx:id="password" layoutX="113.0" layoutY="97.0" />
+      <Button layoutX="162.0" layoutY="143.0" mnemonicParsing="false" onAction="#logInButtonHandle" text="log in"   />
       <Hyperlink layoutX="158.0" layoutY="181.0" text="Sign Up" onAction="#signUpLinkHandle"/>
    </children>
 </AnchorPane>
