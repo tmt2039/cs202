@@ -38,7 +38,7 @@
       <Label layoutX="180.0" layoutY="501.0" text="confirm password" />
       
       <Button layoutX="314.0" layoutY="551.0" mnemonicParsing="false" onAction="#signUpButtonHandle" text="sign up" />
-      <Button layoutX="500.0" layoutY="251.0" mnemonicParsing="false" onAction="#browseButtonHandle" text="Browse" />      
+      <Button  layoutX="500.0" layoutY="251.0" mnemonicParsing="false" onAction="#browseButtonHandle" text="Browse" />      
       
       <Hyperlink layoutX="324.0" layoutY="592.0" text="log in" />
       <DatePicker fx:id="birthdate" layoutX="467.0" layoutY="119.0" prefHeight="31.0" prefWidth="205.0" />

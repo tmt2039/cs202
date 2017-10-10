@@ -51,9 +51,9 @@ public class LogInController extends Application {
 		}
 	}
 	
-	public void signUpLinkHandle()  {
-
-	}
+//	public void signUpLinkHandle()  {
+//
+//	}
 	
 	
 

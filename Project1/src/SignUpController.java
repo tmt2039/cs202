@@ -3,7 +3,9 @@ import java.util.List;
 import java.util.regex.*;
 import java.awt.Button;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class SignUpController {
@@ -54,6 +57,9 @@ public class SignUpController {
 	@FXML
 	PasswordField passwLog;
 
+	@FXML
+	String photo;
+
 	Stage signupStage = null;
 	private static List<User> users = new ArrayList<User>();
 	private static List<Person> person = new ArrayList<Person>();
@@ -73,7 +79,7 @@ public class SignUpController {
 	}
 
 	public boolean firstNameChecker() {
-		String regex = "[A-Z][a-z]+";
+		String regex = "[A-Z a-z]+";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher regexMatcher = pattern.matcher(this.firstName.getText());
 		if (!regexMatcher.matches()) {
@@ -224,9 +230,8 @@ public class SignUpController {
 			alert.setContentText("phone number format is: ###-###-####");
 			alert.showAndWait();
 			return false;
-		} else {
+		} else
 			return true;
-		}
 
 	}
 
@@ -273,15 +278,16 @@ public class SignUpController {
 		confirmPasswordChecker();
 		browseButtonHandle();
 		birthDate();
-		
+
 		Person person = new Person(firstName.getText(), lastName.getText(), gender.getText(), sSN.getText(),
 				birthdate.getValue().toString());
 		User user = new User(userName.getText(), password.getText());
 		user.setPerson(person);
 		user.setEmail(email.getText());
+		user.setPhone(phoneNum.getText());
+		user.setPhoto(photo.toString());
 
 		user.setPassword(password.getText()); // more here
-
 		boolean duplicated = false;
 		for (User theUser : users) {
 			if (theUser.getUserN().equals(userName.getText())) {
@@ -293,9 +299,21 @@ public class SignUpController {
 				duplicated = true;
 				break;
 			}
+			if (theUser.getEmail().equals(email.getText())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Email is taken");
+				alert.setContentText("Please type in a different email.");
+				alert.showAndWait();
+				duplicated = true;
+				break;
+			}
 		}
 		if (!duplicated) {
+
 			users.add(user);
+			System.out.println("users: " + user);
+			System.out.println("persons: " +person);
 		}
 
 	}
@@ -305,9 +323,11 @@ public class SignUpController {
 		System.out.println("file chooser...");
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
+
 		File file = fileChooser.showOpenDialog(signupStage);
 		if (file != null) {
 			System.out.println("File: " + file.getAbsolutePath());
+			photo = file.getAbsolutePath().toString();
 
 		}
 
@@ -315,12 +335,13 @@ public class SignUpController {
 
 	public void logInButtonHandle() {
 		for (User theUser : users) {
-			if (theUser.getUserN().equals(userNLog.getText())) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Error Dialog");
-				alert.setHeaderText("Username ");
-				alert.setContentText("Wrong Username or does not exist.");
-				alert.showAndWait();
+			if (!theUser.getUserN().equals(userNLog.getText())) {
+				System.out.println("nope, username does not exist");
+				// Alert alert = new Alert(AlertType.ERROR);
+				// alert.setTitle("Error Dialog");
+				// alert.setHeaderText("Username ");
+				// alert.setContentText("Wrong Username or does not exist.");
+				// alert.showAndWait();
 			} else if (theUser.getUserN().equals(passwLog.getText())) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Dialog");
@@ -337,4 +358,18 @@ public class SignUpController {
 		}
 
 	}
+
+//	//
+//	String fileName = "userDB.txt";
+//
+//	PrintWriter writer = null;
+//	try {
+//		writer = new PrintWriter(fileName);
+//	} catch (FileNotFoundException e) {
+//		e.printStackTrace();
+//	}
+//	writer.println("user: " + user);
+//	writer.println("person: " + person);
+//
+//	// }
 }
