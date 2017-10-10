@@ -33,7 +33,7 @@ public class LogInController extends Application {
 	@FXML
 	PasswordField passwLog;
 	
-	
+	@FXML
 	Button logInHandle;
 
 	public void start(Stage stage) {
@@ -57,6 +57,31 @@ public class LogInController extends Application {
 	
 	
 
+	public void logInButtonHandle() {
+//		for (User theUser : users) {
+//			if (!theUser.getUserN().equals(userNLog.getText())) {
+//				System.out.println("nope, username does not exist");
+//				// Alert alert = new Alert(AlertType.ERROR);
+//				// alert.setTitle("Error Dialog");
+//				// alert.setHeaderText("Username ");
+//				// alert.setContentText("Wrong Username or does not exist.");
+//				// alert.showAndWait();
+//			} else if (theUser.getUserN().equals(passwLog.getText())) {
+//				Alert alert = new Alert(AlertType.ERROR);
+//				alert.setTitle("Error Dialog");
+//				alert.setHeaderText("Password ");
+//				alert.setContentText("Wrong password or does not exist.");
+//				alert.showAndWait();
+//			} else {
+//				Alert alert = new Alert(AlertType.INFORMATION);
+//				alert.setTitle("Information Dialog");
+//				alert.setHeaderText("Welcome ");
+//				alert.setContentText("Have a nice day.");
+//				alert.showAndWait();
+//			}
+//		}
+		System.out.println();
+	}
 
 	public static void main(String[] args) {
 

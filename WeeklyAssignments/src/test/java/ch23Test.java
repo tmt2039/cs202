@@ -6,7 +6,7 @@ public class ch23Test {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		
 	}
 	private void array1() {
 		Double[] array = { 9.3, 4.32, 50.4, 6.98, 2.00, 32.2, 897.32, 12.32 };
@@ -14,7 +14,7 @@ public class ch23Test {
 	}
 
 	private void array2() {
-		Integer[] array = { 22, 55, 666, 74, 26 };
+		String[] array = {"Finally", "Done", "Now", "Time", "to", "finish", "project"};
 
 	}
 
@@ -24,7 +24,7 @@ public class ch23Test {
 	}
 
 	private void array4() {
-		Integer[] array = { 45, 11, 50, 59, 60, 2, 4, 7, 10};
+		Character[] array = { 'h','a','p','p','y'};
 	}
 
 }

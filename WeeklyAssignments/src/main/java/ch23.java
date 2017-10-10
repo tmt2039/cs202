@@ -1,7 +1,11 @@
+import java.util.Arrays;
 import java.util.Comparator;
 
-public class ch23 {
+// arrays for the unsorted and the comparator
 
+public class ch23 {
+	
+	//textbook given methods
 	public static <E extends Comparable<E>> void quickSort(E[] list) {
 		quickSort(list, 0, list.length - 1);
 	}
@@ -9,128 +13,112 @@ public class ch23 {
 	public static <E> void quickSort(E[] list, Comparator<? super E> comparator) {
 		quickSort(list, 0, list.length - 1, comparator);
 	}
-	public static <E extends Comparable<E>> int partition(E[] list, int first, int last) {
-		E pivot = list[first]; 
+
+	//test out the arrays
+	public static void main(String[] args) {
+		Integer[] intArray = { -2, 32, 54, 3, -98, 100, 231, 1, 43 };
+		quickSort(intArray);
+		System.out.println("Unsorted :" + Arrays.toString(intArray));
+		printNewArray(intArray);
+
+		String[] stringArray = { "apple", "pumpkin", "leaves", "october" };
+		quickSort(stringArray);
+		System.out.println("\n\nUnsorted :" + Arrays.toString(stringArray));
+		printNewArray(stringArray);
+
+		Double[] doubleArray = { 12.3, -90.4, 66.6, 10.13, 100.00, 3.90, 23.3, -89.76, 1.00 };
+		quickSort(doubleArray);
+		System.out.println("\n\nUnsorted :" + Arrays.toString(doubleArray));
+		printNewArray(doubleArray);
+
+		Character[] charArray = { 'f', 'z', 'd', 'm' };
+		System.out.println("\n\nUnsorted :" + Arrays.toString(charArray));
+		quickSort(charArray);
+		printNewArray(charArray);
+
+	}
+
+	//comparator
+	public static <E> int partition(E[] array, int first, int last, Comparator<? super E> c) {
+		E pivot = array[first];
 		int low = first + 1; 
 		int high = last; 
-
 		while (high > low) {
-		
-			while (low <= high && list[low].compareTo(pivot) <= 0) {
+			while (low <= high && c.compare(array[low], pivot) <= 0)
 				low++;
-				if (high > low) {
-					E temp = list[high];
-					list[high] = list[low];
-					list[low] = temp;
-				}
-		}
-			while (low <= high && list[high].compareTo(pivot) > 0) {
+
+			while (low <= high && c.compare(array[high], pivot) > 0)
 				high--;
 			if (high > low) {
-				E temp = list[high];
-				list[high] = list[low];
-				list[low] = temp;
+				E temp = array[high];
+				array[high] = array[low];
+				array[low] = temp;
 			}
 		}
-
-			
-			
-		}
-
-		while (high > first && list[high].compareTo(pivot) >= 0)
+		while (high > first && c.compare(array[high], pivot) >= 0)
 			high--;
-
-		// Swap pivot with list[high]
-		if (pivot.compareTo(list[high]) > 0) {
-			list[first] = list[high];
-			list[high] = pivot;
+		if (c.compare(pivot, array[high]) > 0) {
+			array[first] = array[high];
+			array[high] = pivot;
 			return high;
-		}
-		else {
+		} else {
 			return first;
 		}
 	}
-
-
-	
-
-	public static <E extends Comparable<E>> void quickSort(E[] list, int first, int last) {
-
-		if (last > first) {
-			int partition = partition(list, first, last);
-			quickSort(list, last, list.length + 1);
-			quickSort(list, first, list.length - 1);
-		}
-
-	}
-
-	public static <E> int partition(E[] list, int first, int last, Comparator<? super E> c) {
-
-		E pivot = list[first]; 
-		int low = first + 1; 
-		int high = last; 
-
-		while (high > low) {
-	
-			while (low <= high && c.compare(list[low], pivot) <= 0) {
-				low++;
-				if (high > low) {
-					E temp = list[high];
-					list[high] = list[low];
-					list[low] = temp;
-				}
-		}
-			while (low <= high && c.compare(list[high], pivot) > 0)
-				high--;
-			if (high > low) {
-				E temp = list[high];
-				list[high] = list[low];
-				list[low] = temp;
-			}
-		}
-			
-		
-
-		while (high > first && c.compare(list[high], pivot) >= 0)
-			high--;
-
-		
-		if (c.compare(pivot, list[high]) > 0) {
-			list[first] = list[high];
-			list[high] = pivot;
-			return high;
-		}
-		else {
-			return first;
-		}
-	}
-
 
 	public static <E> void quickSort(E[] list, int first, int last, Comparator<? super E> c) {
 
 		if (last > first) {
-			int partition = partition(list, first, last, c);
-			quickSort(list, last, list.length + 1, c);
-			quickSort(list, first, list.length - 1, c);
+			int pivotIndex = partition(list, first, last, c);
+			quickSort(list, first, pivotIndex - 1, c);
+			quickSort(list, pivotIndex + 1, last, c);
 		}
-
 	}
 
-	public static void print(Object[] list) {
-		for (int i = 0; i < list.length; i++) {
-			System.out.print(list[i] + " ");
+	// comparable 
+	public static <E extends Comparable<E>> int partition(E[] array, int first, int last) {
+		E pivot = array[first];
+		int low = first + 1; 
+		int high = last;
+		while (high > low) {
+			while (low <= high && array[low].compareTo(pivot) <= 0)
+				low++;
+
+			while (low <= high && array[high].compareTo(pivot) > 0)
+				high--;
+			if (high > low) {
+				E temp = array[high];
+				array[high] = array[low];
+				array[low] = temp;
+			}
+		}
+		while (high > first && array[high].compareTo(pivot) >= 0)
+			high--;
+		if (pivot.compareTo(array[high]) > 0) {
+			array[first] = array[high];
+			array[high] = pivot;
+			return high;
+		} else {
+			return first;
+		}
+	}
+
+	public static <E extends Comparable<E>> void quickSort(E[] list, int first, int last) {
+
+		if (last > first) {
+			int pivotIndex = partition(list, first, last);
+			quickSort(list, first, pivotIndex - 1);
+			quickSort(list, pivotIndex + 1, last);
+		}
+	}
+
+	//print out the new arrays
+	public static void printNewArray(Object[] list) {
+		System.out.print("Sorted : ");
+		for (int x = 0; x < list.length; x++) {
+			System.out.print(list[x] + " ");
 		}
 		System.out.println();
 	}
 
-	public static void main(String[] args) {
-		Integer array[] = { 6, 8, 9, 10, 14, 20, 60, 11 };
-		
-		 int first = array[0];
-		 int last = array.length - 1;
-		quickSort(array);
-		print(array);
-	}
-
-	
 }
