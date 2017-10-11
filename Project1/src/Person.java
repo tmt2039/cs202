@@ -56,6 +56,6 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person{" + "\nfirstN='" + firstN + '\'' + ", \nlastN='" + lastN + '\'' + ", \ngender='" + gender + '\''
-				+ ", \nsSN=" + sSN + ", \ndOB=" + dOB + '}';
+				+ ", \nSSN= " + sSN + ", \nDOB= " + dOB + '}';
 	}
 }

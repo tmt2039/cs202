@@ -1,0 +1,10 @@
+User(email='StoneI@mail.edu'
+, userN='IvyS96'
+, password='D0oM$d@Y12'
+, photo=' C:\Users\Administrator\Pictures\images.jpg'
+, phone='601-623-8751}Person{
+firstN='Ivy', 
+lastN='Stone', 
+gender='F', 
+SSN= 989-652-3148, 
+DOB= 1996-04-12}

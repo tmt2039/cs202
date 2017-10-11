@@ -4,9 +4,11 @@ import java.util.regex.*;
 import java.awt.Button;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.fxml.FXML;
@@ -62,10 +64,12 @@ public class SignUpController {
 	String photo;
 
 	Stage signupStage = null;
+
+	private static final String FILENAME = "C:\\cs202\\Project1\\src\\text1.txt";
+
 	private static List<User> users = new ArrayList<User>();
 	private static List<Person> person = new ArrayList<Person>();
 
-		
 	public void signUpLinkHandle() {
 		signupStage = new Stage();
 
@@ -280,7 +284,8 @@ public class SignUpController {
 		confirmPasswordChecker();
 		browseButtonHandle();
 		birthDate();
-		
+		// bufferedWriter();
+
 		Person person = new Person(firstName.getText(), lastName.getText(), gender.getText(), sSN.getText(),
 				birthdate.getValue().toString());
 		User user = new User(userName.getText(), password.getText());
@@ -290,6 +295,7 @@ public class SignUpController {
 		user.setPhoto(photo.toString());
 
 		user.setPassword(password.getText()); // more here
+
 		boolean duplicated = false;
 		for (User theUser : users) {
 			if (theUser.getUserN().equals(userName.getText())) {
@@ -298,7 +304,7 @@ public class SignUpController {
 				alert.setHeaderText("Username is taken");
 				alert.setContentText("Please type in a different username.");
 				alert.showAndWait();
-				duplicated = true;
+				// duplicated = true;
 				break;
 			}
 			if (theUser.getEmail().equals(email.getText())) {
@@ -307,17 +313,98 @@ public class SignUpController {
 				alert.setHeaderText("Email is taken");
 				alert.setContentText("Please type in a different email.");
 				alert.showAndWait();
-				duplicated = true;
+				// duplicated = true;
 				break;
+
 			}
 		}
 		if (!duplicated) {
 
 			users.add(user);
 			System.out.println("users: " + user);
-			System.out.println("persons: " +person);
+			System.out.println("persons: " + person);
+			bufferedWriter(user, person);
+			bufferedReader(user, person);
+
+		}
+	}
+
+	public void bufferedWriter(User user, Person person) {
+
+		BufferedWriter bw = null;
+		FileWriter fw = null;
+		System.out.println("fw " + fw + "\nbw " + bw);
+		try {
+
+			fw = new FileWriter(FILENAME);
+			bw = new BufferedWriter(fw);
+			bw.write(user.toString());
+			bw.write(person.toString());
+
+			System.out.println("Done");
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (bw != null)
+					bw.close();
+
+				if (fw != null)
+					fw.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
 		}
 
+	}
+
+	public void bufferedReader(User user, Person person) {
+		BufferedReader br = null;
+		FileReader fr = null;
+
+		try {
+
+			// br = new BufferedReader(new FileReader(FILENAME));
+			fr = new FileReader(FILENAME);
+			br = new BufferedReader(fr);
+
+			String users = user.toString();
+			String persons = person.toString();
+
+			while ((users = br.readLine()) != null && (persons = br.readLine()) != null) {
+				System.out.println(users);
+				System.out.println(persons);
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (br != null)
+					br.close();
+
+				if (fr != null)
+					fr.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+
+		}
 	}
 
 	public void browseButtonHandle() {
@@ -331,19 +418,16 @@ public class SignUpController {
 			System.out.println("File: " + file.getAbsolutePath());
 			photo = file.getAbsolutePath().toString();
 
-		}
+		}else
+			System.out.println("please select a jpg. file");
 
 	}
-//
+
 	public void logInButtonHandle() {
 		for (User theUser : users) {
 			if (!theUser.getUserN().equals(userNLog.getText())) {
 				System.out.println("nope, username does not exist");
-				// Alert alert = new Alert(AlertType.ERROR);
-				// alert.setTitle("Error Dialog");
-				// alert.setHeaderText("Username ");
-				// alert.setContentText("Wrong Username or does not exist.");
-				// alert.showAndWait();
+
 			} else if (theUser.getUserN().equals(passwLog.getText())) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Dialog");
@@ -360,6 +444,5 @@ public class SignUpController {
 		}
 
 	}
-
 
 }

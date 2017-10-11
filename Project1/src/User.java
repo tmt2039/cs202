@@ -51,8 +51,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User(" + "email='" + email + '\'' + ", userN='" + userName + '\'' + ", password='" + password + '\''
-				+ ", photo=' " + photo + '\'' + ", phone='" + phone + '}';
+		return "User(" + "email='" + email + '\'' + "\n, userN='" + userName + '\'' + "\n, password='" + password + '\''
+				+ "\n, photo=' " + photo + '\'' + "\n, phone='" + phone + '}';
 	}
 
 	public Person getPerson() {
