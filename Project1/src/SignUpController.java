@@ -275,6 +275,7 @@ public class SignUpController {
 	public void signUpButtonHandle() {
 		logInButtonHandle();
 		System.out.println("users: " + users.size());
+
 		firstNameChecker();
 		genderChecker();
 		emailChecker();
@@ -284,7 +285,6 @@ public class SignUpController {
 		confirmPasswordChecker();
 		browseButtonHandle();
 		birthDate();
-		// bufferedWriter();
 
 		Person person = new Person(firstName.getText(), lastName.getText(), gender.getText(), sSN.getText(),
 				birthdate.getValue().toString());
@@ -317,6 +317,7 @@ public class SignUpController {
 				break;
 
 			}
+
 		}
 		if (!duplicated) {
 
@@ -325,6 +326,8 @@ public class SignUpController {
 			System.out.println("persons: " + person);
 			bufferedWriter(user, person);
 			bufferedReader(user, person);
+
+		} else {
 
 		}
 	}
@@ -372,16 +375,16 @@ public class SignUpController {
 
 		try {
 
-			// br = new BufferedReader(new FileReader(FILENAME));
+			
 			fr = new FileReader(FILENAME);
 			br = new BufferedReader(fr);
 
-			String users = user.toString();
-			String persons = person.toString();
+			String userString = user.toString();
+			String personString = person.toString();
 
-			while ((users = br.readLine()) != null && (persons = br.readLine()) != null) {
-				System.out.println(users);
-				System.out.println(persons);
+			while ((userString = br.readLine()) != null && (personString = br.readLine()) != null) {
+				System.out.println(userString);
+				System.out.println(personString);
 			}
 
 		} catch (IOException e) {
@@ -418,31 +421,31 @@ public class SignUpController {
 			System.out.println("File: " + file.getAbsolutePath());
 			photo = file.getAbsolutePath().toString();
 
-		}else
+		} else
 			System.out.println("please select a jpg. file");
 
 	}
 
 	public void logInButtonHandle() {
-		for (User theUser : users) {
-			if (!theUser.getUserN().equals(userNLog.getText())) {
-				System.out.println("nope, username does not exist");
-
-			} else if (theUser.getUserN().equals(passwLog.getText())) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Error Dialog");
-				alert.setHeaderText("Password ");
-				alert.setContentText("Wrong password or does not exist.");
-				alert.showAndWait();
-			} else {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Dialog");
-				alert.setHeaderText("Welcome ");
-				alert.setContentText("Have a nice day.");
-				alert.showAndWait();
-			}
-		}
-
+		// for (User theUser : users) {
+		// if (!theUser.getUserN().equals(userNLog.getText())) {
+		// System.out.println("nope, username does not exist");
+		//
+		// } else if (theUser.getUserN().equals(passwLog.getText())) {
+		// Alert alert = new Alert(AlertType.ERROR);
+		// alert.setTitle("Error Dialog");
+		// alert.setHeaderText("Password ");
+		// alert.setContentText("Wrong password or does not exist.");
+		// alert.showAndWait();
+		// } else {
+		// Alert alert = new Alert(AlertType.INFORMATION);
+		// alert.setTitle("Information Dialog");
+		// alert.setHeaderText("Welcome ");
+		// alert.setContentText("Have a nice day.");
+		// alert.showAndWait();
+		// }
+		// }
+		System.out.println("currently not working at the moment :(");
 	}
 
 }

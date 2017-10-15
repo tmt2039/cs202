@@ -21,10 +21,10 @@ public class ch23 {
 		System.out.println("Unsorted :" + Arrays.toString(intArray));
 		printNewArray(intArray);
 
-		String[] stringArray = { "apple", "pumpkin", "leaves", "october" };
-		quickSort(stringArray);
-		System.out.println("\n\nUnsorted :" + Arrays.toString(stringArray));
-		printNewArray(stringArray);
+//		String[] stringArray = { "apple", "pumpkin", "leaves", "october" };
+//		quickSort(stringArray);
+//		System.out.println("\n\nUnsorted :" + Arrays.toString(stringArray));
+//		printNewArray(stringArray);
 
 		Double[] doubleArray = { 12.3, -90.4, 66.6, 10.13, 100.00, 3.90, 23.3, -89.76, 1.00 };
 		quickSort(doubleArray);
