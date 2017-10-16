@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Person {
 
@@ -49,7 +51,7 @@ public class Person {
 		return dOB;
 	}
 
-	public  void setdOB(String dOB) {
+	public void setdOB(String dOB) {
 		this.dOB = dOB;
 	}
 

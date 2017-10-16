@@ -1,26 +1,22 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.*;
-import java.awt.Button;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 public class SignUpController {
@@ -65,10 +61,17 @@ public class SignUpController {
 
 	Stage signupStage = null;
 
-	private static final String FILENAME = "C:\\cs202\\Project1\\src\\text1.txt";
-
+	private static final String FILENAME = "C:\\cs202\\Project1\\userDB.txt";
+	private static FileChooser fileChooser = new FileChooser();
 	private static List<User> users = new ArrayList<User>();
 	private static List<Person> person = new ArrayList<Person>();
+
+	public SignUpController() {
+		System.out.println("Constructor ....");
+		// Delete the FILENAME
+		File file = new File(FILENAME);
+		file.delete();
+	}
 
 	public void signUpLinkHandle() {
 		signupStage = new Stage();
@@ -273,7 +276,11 @@ public class SignUpController {
 	}
 
 	public void signUpButtonHandle() {
-		logInButtonHandle();
+		System.out.println("signing up ...");
+
+		// for testing only ...
+		this.forTestingOnly();
+
 		System.out.println("users: " + users.size());
 
 		firstNameChecker();
@@ -283,9 +290,8 @@ public class SignUpController {
 		phoneNumberChecker();
 		passwordChecker();
 		confirmPasswordChecker();
-		browseButtonHandle();
-		birthDate();
 
+		birthDate();
 		Person person = new Person(firstName.getText(), lastName.getText(), gender.getText(), sSN.getText(),
 				birthdate.getValue().toString());
 		User user = new User(userName.getText(), password.getText());
@@ -296,6 +302,20 @@ public class SignUpController {
 
 		user.setPassword(password.getText()); // more here
 
+		if (userIsInTheList(user)) {
+			System.out.println("You got a duplicate.");
+		} else {
+			addUserToTheList(user);
+			writeTheUserToTheFile(user);
+		}
+
+	}
+
+	private void addUserToTheList(User newUser) {
+		users.add(newUser);
+	}
+
+	private boolean userIsInTheList(User newUser) {
 		boolean duplicated = false;
 		for (User theUser : users) {
 			if (theUser.getUserN().equals(userName.getText())) {
@@ -304,7 +324,7 @@ public class SignUpController {
 				alert.setHeaderText("Username is taken");
 				alert.setContentText("Please type in a different username.");
 				alert.showAndWait();
-				// duplicated = true;
+				duplicated = true;
 				break;
 			}
 			if (theUser.getEmail().equals(email.getText())) {
@@ -313,120 +333,90 @@ public class SignUpController {
 				alert.setHeaderText("Email is taken");
 				alert.setContentText("Please type in a different email.");
 				alert.showAndWait();
-				// duplicated = true;
+				duplicated = true;
 				break;
 
 			}
 
 		}
-		if (!duplicated) {
-
-			users.add(user);
-			System.out.println("users: " + user);
-			System.out.println("persons: " + person);
-			bufferedWriter(user, person);
-			bufferedReader(user, person);
-
-		} else {
-
-		}
+		return duplicated;
 	}
 
-	public void bufferedWriter(User user, Person person) {
-
+	public void writeTheUserToTheFile(User newUser) {
+		System.out.println("Writing to file " + newUser.getUserN());
 		BufferedWriter bw = null;
 		FileWriter fw = null;
-		System.out.println("fw " + fw + "\nbw " + bw);
+
 		try {
 
-			fw = new FileWriter(FILENAME);
-			bw = new BufferedWriter(fw);
-			bw.write(user.toString());
-			bw.write(person.toString());
-
-			System.out.println("Done");
+			bw = new BufferedWriter(new FileWriter(FILENAME, true)); // true mean to append at the end of the file
+			bw.write(newUser.toString());
+			bw.write("\r\n");
+			bw.write(newUser.getPerson().toString());
+			bw.write("\r\n");
 
 		} catch (IOException e) {
-
+			System.out.println("Error in opening or writing file.");
 			e.printStackTrace();
-
 		} finally {
-
 			try {
-
 				if (bw != null)
 					bw.close();
 
-				if (fw != null)
-					fw.close();
-
 			} catch (IOException ex) {
-
+				System.out.println("Error in closing file.");
 				ex.printStackTrace();
-
 			}
 		}
-
-	}
-
-	public void bufferedReader(User user, Person person) {
-		BufferedReader br = null;
-		FileReader fr = null;
-
-		try {
-
-			
-			fr = new FileReader(FILENAME);
-			br = new BufferedReader(fr);
-
-			String userString = user.toString();
-			String personString = person.toString();
-
-			while ((userString = br.readLine()) != null && (personString = br.readLine()) != null) {
-				System.out.println(userString);
-				System.out.println(personString);
-			}
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		} finally {
-
-			try {
-
-				if (br != null)
-					br.close();
-
-				if (fr != null)
-					fr.close();
-
-			} catch (IOException ex) {
-
-				ex.printStackTrace();
-
-			}
-
-		}
+		System.out.println("Done");
 	}
 
 	public void browseButtonHandle() {
 
-		System.out.println("file chooser...");
-		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
 
 		File file = fileChooser.showOpenDialog(signupStage);
 		if (file != null) {
-			System.out.println("File: " + file.getAbsolutePath());
-			photo = file.getAbsolutePath().toString();
 
-		} else
-			System.out.println("please select a jpg. file");
+			photo = file.getAbsolutePath().toString();
+		}
 
 	}
 
-	public void logInButtonHandle() {
+	// TESTING ONLY --- REMOVE after DONE ...
+	public int testUserNumber = 1;
+
+	private Stage logInStage;
+
+	private void forTestingOnly() {
+		this.userName.setText("user-" + testUserNumber);
+		firstName.setText("firstname");
+		lastName.setText("lastname");
+		email.setText("abc" + testUserNumber + "@mail.com");
+		this.sSN.setText("123-345-6489");
+		// this.birthdate = new DatePicker();
+		this.gender.setText("F");
+		this.password.setText("Password@1234");
+		this.confirmPassword.setText("Password@1234");
+		this.phoneNum.setText("123-336-7890");
+		this.photo = "c:\\abc\\photo.gif";
+		testUserNumber++;
+	}
+
+	public void loginLinkHandle() {
+
+		logInStage = new Stage();
+
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
+			Parent root = loader.load();
+			logInStage.setTitle("LogIn Page");
+			logInStage.setScene(new Scene(root));
+			logInStage.show();
+		} catch (IOException ioe) {
+			System.out.println(ioe.getMessage());
+		}
+
 		// for (User theUser : users) {
 		// if (!theUser.getUserN().equals(userNLog.getText())) {
 		// System.out.println("nope, username does not exist");
@@ -445,7 +435,7 @@ public class SignUpController {
 		// alert.showAndWait();
 		// }
 		// }
-		System.out.println("currently not working at the moment :(");
+		// // System.out.println("currently not working at the moment :(");
 	}
 
 }
