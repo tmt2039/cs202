@@ -278,8 +278,7 @@ public class SignUpController {
 	public void signUpButtonHandle() {
 		System.out.println("signing up ...");
 
-		// for testing only ...
-		this.forTestingOnly();
+	
 
 		System.out.println("users: " + users.size());
 
@@ -383,25 +382,7 @@ public class SignUpController {
 
 	}
 
-	// TESTING ONLY --- REMOVE after DONE ...
-	public int testUserNumber = 1;
-
 	private Stage logInStage;
-
-	private void forTestingOnly() {
-		this.userName.setText("user-" + testUserNumber);
-		firstName.setText("firstname");
-		lastName.setText("lastname");
-		email.setText("abc" + testUserNumber + "@mail.com");
-		this.sSN.setText("123-345-6489");
-		// this.birthdate = new DatePicker();
-		this.gender.setText("F");
-		this.password.setText("Password@1234");
-		this.confirmPassword.setText("Password@1234");
-		this.phoneNum.setText("123-336-7890");
-		this.photo = "c:\\abc\\photo.gif";
-		testUserNumber++;
-	}
 
 	public void loginLinkHandle() {
 
@@ -417,25 +398,25 @@ public class SignUpController {
 			System.out.println(ioe.getMessage());
 		}
 
-		// for (User theUser : users) {
-		// if (!theUser.getUserN().equals(userNLog.getText())) {
-		// System.out.println("nope, username does not exist");
-		//
-		// } else if (theUser.getUserN().equals(passwLog.getText())) {
-		// Alert alert = new Alert(AlertType.ERROR);
-		// alert.setTitle("Error Dialog");
-		// alert.setHeaderText("Password ");
-		// alert.setContentText("Wrong password or does not exist.");
-		// alert.showAndWait();
-		// } else {
-		// Alert alert = new Alert(AlertType.INFORMATION);
-		// alert.setTitle("Information Dialog");
-		// alert.setHeaderText("Welcome ");
-		// alert.setContentText("Have a nice day.");
-		// alert.showAndWait();
-		// }
-		// }
-		// // System.out.println("currently not working at the moment :(");
+		for (User theUser : users) {
+			if (!theUser.getUserN().equals(userNLog.getText())) {
+				System.out.println("nope, username does not exist");
+
+			} else if (theUser.getUserN().equals(passwLog.getText())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Password ");
+				alert.setContentText("Wrong password or does not exist.");
+				alert.showAndWait();
+			} else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText("Welcome ");
+				alert.setContentText("Have a nice day.");
+				alert.showAndWait();
+			}
+		}
+		System.out.println("currently not working at the moment :(");
 	}
 
 }
