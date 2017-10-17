@@ -278,8 +278,6 @@ public class SignUpController {
 	public void signUpButtonHandle() {
 		System.out.println("signing up ...");
 
-	
-
 		System.out.println("users: " + users.size());
 
 		firstNameChecker();
@@ -418,5 +416,29 @@ public class SignUpController {
 		}
 		System.out.println("currently not working at the moment :(");
 	}
+
+	public Object add(String string) {
+		return person;
+
+	}
+	
+
+	public Object addLast(String string) {
+		return users;
+		
+	}
+
+	public void remove(int i) {
+		users.remove(0);
+		
+	}
+
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+
 
 }
