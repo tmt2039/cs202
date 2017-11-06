@@ -5492,3 +5492,9 @@ org.eclipse.jdt.core.JavaModelException: bin [in Project1] is not on its project
 2017-11-06 13:39:25,552 [Worker-31] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\cs202\WeeklyAssignments\src\test\resources
 2017-11-06 14:07:09,109 [Worker-47] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2017-11-06 14:07:09,109 [Worker-47] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\cs202\WeeklyAssignments\src\main\resources
+2017-11-06 14:07:09,115 [Worker-47] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-11-06 14:07:09,119 [Worker-47] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\cs202\WeeklyAssignments\src\test\resources
+2017-11-06 14:32:17,998 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-11-06 14:32:18,071 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\cs202\WeeklyAssignments\src\main\resources
+2017-11-06 14:32:18,072 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-11-06 14:32:18,076 [Worker-56] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\cs202\WeeklyAssignments\src\test\resources
