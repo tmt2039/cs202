@@ -1,28 +1,34 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class ch27 {
 	public static void main(String[] args) {
 
-		MyMap<String, Integer> map = new MyHashMap<String, Integer>();
-		  map.put("Jones", 19);
-		  map.put("Chang", 26);
-		  map.put("Lee", 36);
-		  map.put("Do", 34);
-		  map.put("Miller", 58);
+		Set<String> set = new java.util.HashSet<>();
+		set.add("Mark");
+		set.add("Smith");
+		set.add("Anderson");
+		set.add("Sally");
+		System.out.println("Elements in the set: " + set);
 
-		  System.out.println("Entries in map: " + map);
+		ArrayList<String> list = setToList(set);
+		System.out.println("Elements in the ArrayList: " + list);
+		System.out.println("Elements at ArrayList index 2: " + list.get(2));
 
-		  System.out.println("The age for " + "Jones is " + map.get("Jones"));
-
-		  System.out.println("Is Do in the map? " + map.containsKey("Do"));
-		  System.out.println("Is age 33 in the map? " + map.containsValue(33));
-
-		  map.remove("Do");
-		  System.out.println("Entries in map: " + map);
-
-		  map.clear();
-		  System.out.println("Entries in map: " + map);
 	}
+
+	public static <E> ArrayList<E> setToList(Set<E> s) {
+
+		ArrayList<E> list = new ArrayList<>();
+
+		for (E e : s) {
+			list.add(e);
+		}
+
+		return list;
+	}
+
 	public static class MyHashMap<K, V> implements MyMap<K, V> {
 
 		private static int DEFAULT_INITIAL_CAPACITY = 4;
