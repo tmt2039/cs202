@@ -385,7 +385,9 @@ public class SignUpController {
 	public void loginLinkHandle() {
 
 		logInStage = new Stage();
-
+		
+		
+	
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
 			Parent root = loader.load();
@@ -396,25 +398,25 @@ public class SignUpController {
 			System.out.println(ioe.getMessage());
 		}
 
-		for (User theUser : users) {
-			if (!theUser.getUserN().equals(userNLog.getText())) {
-				System.out.println("nope, username does not exist");
-
-			} else if (theUser.getUserN().equals(passwLog.getText())) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Error Dialog");
-				alert.setHeaderText("Password ");
-				alert.setContentText("Wrong password or does not exist.");
-				alert.showAndWait();
-			} else {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Dialog");
-				alert.setHeaderText("Welcome ");
-				alert.setContentText("Have a nice day.");
-				alert.showAndWait();
-			}
-		}
-		System.out.println("currently not working at the moment :(");
+//		for (User theUser : users) {
+//			if (!theUser.getUserN().equals(userNLog.getText())) {
+//				System.out.println("nope, username does not exist");
+//
+//			} else if (theUser.getUserN().equals(passwLog.getText())) {
+//				Alert alert = new Alert(AlertType.ERROR);
+//				alert.setTitle("Error Dialog");
+//				alert.setHeaderText("Password ");
+//				alert.setContentText("Wrong password or does not exist.");
+//				alert.showAndWait();
+//			} else {
+//				Alert alert = new Alert(AlertType.INFORMATION);
+//				alert.setTitle("Information Dialog");
+//				alert.setHeaderText("Welcome ");
+//				alert.setContentText("Have a nice day.");
+//				alert.showAndWait();
+//			}
+//		}
+//		System.out.println("currently not working at the moment :(");
 	}
 
 

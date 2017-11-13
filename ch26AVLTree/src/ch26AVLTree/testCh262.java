@@ -8,7 +8,13 @@ import java.util.Collections;
 import org.junit.Test;
 
 public class testCh262 {
-
+	@Test
+	public void test() {
+		
+	}
+	private void random1() {
+		
+	}
 	public static void main(String[] args) {
 		  ArrayList<Integer> data = new ArrayList<>();
 		  BST<Integer> bst = new BST();

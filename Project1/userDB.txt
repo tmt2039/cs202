@@ -1,0 +1,22 @@
+User(email='HWSUCKS@mail.net'
+, userN='user'
+, password='P@ss123'
+, photo=' C:\Users\Administrator\Pictures\ch26.JPG'
+, phone='(   )   -}
+Person{
+firstN='Katherine', 
+lastN='Jones', 
+gender='F', 
+SSN= 123-123-1233, 
+DOB= 1973-12-31}
+User(email='HWSUCKS1@mail.net'
+, userN='user1'
+, password='P@ss123'
+, photo=' C:\Users\Administrator\Pictures\ch26.JPG'
+, phone='123-123-9873}
+Person{
+firstN='Katherine', 
+lastN='Jones', 
+gender='F', 
+SSN= 123-123-1233, 
+DOB= 1973-12-31}

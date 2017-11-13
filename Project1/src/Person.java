@@ -4,6 +4,8 @@ import java.util.List;
 public class Person {
 
 	public String firstN, lastN, gender, sSN, dOB;
+	
+	
 
 	public Person(String firstN, String lastN, String gender, String sSN, String dOB) {
 		this.firstN = firstN;
