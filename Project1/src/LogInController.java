@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class LogInController extends Application {
 //public static List<User>;
-
+User theUser;
 	@FXML
 	TextField userNLog;
 
@@ -54,7 +54,7 @@ public class LogInController extends Application {
 
 	public void logInButtonHandle() {
 		System.out.println("Hello");
-		 for (User theUser : users) {
+		// for (User theUser : users) {
 		 if (!theUser.getUserN().equals(userNLog.getText())) {
 		 System.out.println("nope, username does not exist");
 		 Alert alert = new Alert(AlertType.ERROR);
@@ -75,7 +75,7 @@ public class LogInController extends Application {
 		 alert.setContentText("Have a nice day.");
 		 alert.showAndWait();
 		 }
-			}
+			//}
 
 	// System.out.println();
 	}

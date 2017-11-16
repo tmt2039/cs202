@@ -52,7 +52,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User(" + "email='" + email + '\'' + "\n, userN='" + userName + '\'' + "\n, password='" + password + '\''
-				+ "\n, photo=' " + photo + '\'' + "\n, phone='" + phone + '}';
+				+ "\n, photo=' " + photo + '\'' +"\n, phone='" + phone +  '}';
 	}
 
 	public Person getPerson() {

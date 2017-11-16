@@ -1,0 +1,70 @@
+//	public void loginLinkHandle(MouseEvent mouseEvent) {
+//
+//		try {
+//			FXMLLoader loader = new FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
+//
+//			Parent root = loader.load();
+//			Stage primaryStage = (Stage) (((Stage) ((Node) mouseEvent.getSource())).getScene().getWindow());
+//
+//			primaryStage.setTitle("Login Page");
+//			primaryStage.setScene(new Scene(root));
+//			primaryStage.show();
+//		} catch (IOException ioe) {
+//			System.out.println(ioe.getMessage());
+//		}
+//
+//	}
+
+	// public void loginLinkHandle(MouseEvent mouseEvent)throws Exception {
+	// FXMLLoader loader = new
+	// FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
+	//
+	// Parent root = loader.load();
+	// Stage primaryStage =(Stage) (((Stage)
+	// ((Node)mouseEvent.getSource())).getScene().getWindow());
+	//
+	//
+	// primaryStage.setTitle("Login Page");
+	// primaryStage.setScene(new Scene(root));
+	// primaryStage.show();
+	//
+	//
+	// }
+	// private Stage logInStage;
+	// public void loginLinkHandle() {
+	//
+	// logInStage = new Stage();
+	//
+	//
+	//
+	// try {
+	// FXMLLoader loader = new
+	// FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
+	// Parent root = loader.load();
+	// logInStage.setTitle("LogIn Page");
+	// logInStage.setScene(new Scene(root));
+	// logInStage.show();
+	// } catch (IOException ioe) {
+	// System.out.println(ioe.getMessage());
+	// }
+	//
+	//// for (User theUser : users) {
+	//// if (!theUser.getUserN().equals(userNLog.getText())) {
+	//// System.out.println("nope, username does not exist");
+	////
+	//// } else if (theUser.getUserN().equals(passwLog.getText())) {
+	//// Alert alert = new Alert(AlertType.ERROR);
+	//// alert.setTitle("Error Dialog");
+	//// alert.setHeaderText("Password ");
+	//// alert.setContentText("Wrong password or does not exist.");
+	//// alert.showAndWait();
+	//// } else {
+	//// Alert alert = new Alert(AlertType.INFORMATION);
+	//// alert.setTitle("Information Dialog");
+	//// alert.setHeaderText("Welcome ");
+	//// alert.setContentText("Have a nice day.");
+	//// alert.showAndWait();
+	//// }
+	//// }
+	//// System.out.println("currently not working at the moment :(");
+	// }
