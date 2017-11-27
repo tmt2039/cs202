@@ -1,4 +1,4 @@
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.xml.soap.Node;
 
 import javafx.fxml.FXML;
@@ -384,29 +383,21 @@ public class SignUpController {
 
 	}
 
-	// public void loginLinkHandle() {
-	//
-	// Stage logInStage = new Stage();
-	//
-	// try {
-	// FXMLLoader loader = new
-	// FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
-	// Parent root = loader.load();
-	// logInStage.setTitle("LogIn Page");
-	// logInStage.setScene(new Scene(root));
-	// logInStage.show();
-	// } catch (IOException ioe) {
-	// System.out.println(ioe.getMessage());
-	// }
-	// }
-
 	public void loginLinkHandle(ActionEvent actionEvent) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("Log_in_page_SB.fxml"));
-		Stage logInStage = (Stage) (((Stage) (Node) (actionEvent.getSource())).getScene().getWindow());
+		try {
+			// FXMLLoader loader = new
+			// FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
+			//
+			// Parent root = loader.load();
+			Parent root = FXMLLoader.load(getClass().getResource("Log_in_page_SB.fxml"));
+			Stage logInStage = (Stage) (((Stage) (actionEvent.getSource())).getScene().getWindow());
 
-		logInStage.setTitle("LogIn Page");
-		logInStage.setScene(new Scene(root));
-		logInStage.show();
+			logInStage.setTitle("LogIn Page");
+			logInStage.setScene(new Scene(root));
+			logInStage.show();
+		} catch (IOException ioe) {
+			System.out.println(ioe.getMessage());
+		}
 
 	}
 }

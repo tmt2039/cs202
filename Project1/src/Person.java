@@ -4,69 +4,62 @@ import java.util.List;
 public class Person {
 
 	public String firstN, lastN, gender, sSN, dOB;
-	
-	public String city, address, state, zip, location; 
-	
-	
+
+	public String city, address, state, zip, location;
+
 	public Person(String firstN, String lastN, String gender, String sSN, String dOB) {
-//String city, String address, String state, String zip, String location)		
-//		this.city = city;
-//		this.address = address;
-//		this.state = state;
-//		this.zip = zip;
-//		this.location = location;
+		// String city, String address, String state, String zip, String location)
+		// this.city = city;
+		// this.address = address;
+		// this.state = state;
+		// this.zip = zip;
+		// this.location = location;
 		this.firstN = firstN;
 		this.lastN = lastN;
 		this.gender = gender;
 		this.sSN = sSN;
 		this.dOB = dOB;
-	
 
 	}
-//	public String getCity() {
-//		return city;
-//	}
-//
-//	public void setCity(String city) {
-//		this.city = city;
-//	}
-//
-//	public String getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddress(String address) {
-//		this.address = address;
-//	}
-//
-//	public String getState() {
-//		return state;
-//	}
-//
-//	public void setState(String state) {
-//		this.state = state;
-//	}
-//
-//	public String getZip() {
-//		return zip;
-//	}
-//
-//	public void setZip(String zip) {
-//		this.zip = zip;
-//	}
-//
-//	public String getLocation() {
-//		return location;
-//	}
-//
-//	public void setLocation(String location) {
-//		this.location = location;
-//	}
-
-
-
-
-
+	// public String getCity() {
+	// return city;
+	// }
+	//
+	// public void setCity(String city) {
+	// this.city = city;
+	// }
+	//
+	// public String getAddress() {
+	// return address;
+	// }
+	//
+	// public void setAddress(String address) {
+	// this.address = address;
+	// }
+	//
+	// public String getState() {
+	// return state;
+	// }
+	//
+	// public void setState(String state) {
+	// this.state = state;
+	// }
+	//
+	// public String getZip() {
+	// return zip;
+	// }
+	//
+	// public void setZip(String zip) {
+	// this.zip = zip;
+	// }
+	//
+	// public String getLocation() {
+	// return location;
+	// }
+	//
+	// public void setLocation(String location) {
+	// this.location = location;
+	// }
 
 	public String getFirstN() {
 		return firstN;
@@ -111,6 +104,6 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person{" + "\nfirstN='" + firstN + '\'' + ", \nlastN='" + lastN + '\'' + ", \ngender='" + gender + '\''
-				+ ", \nSSN= " + sSN + ", \nDOB= " + dOB +  '}';
+				+ ", \nSSN= " + sSN + ", \nDOB= " + dOB + '}';
 	}
 }
