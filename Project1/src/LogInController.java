@@ -1,6 +1,8 @@
 import java.awt.Button;
 import java.awt.Component;
 import java.io.IOException;
+
+// using arraylist to store information
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
@@ -32,7 +34,6 @@ public class LogInController extends Application {
 
 	private static List<User> users = new ArrayList<User>();
 
-	// List<Integer> list = number.getList();
 	public void start(Stage stage) {
 
 		try {
@@ -49,38 +50,28 @@ public class LogInController extends Application {
 	}
 
 	public void logInButtonHandle() {
-		 System.out.println("login button is presse for " + userNLog.getText() + " / " + this.passwLog.getText());
+		System.out.println("login button is presse for " + userNLog.getText() + " / " + this.passwLog.getText());
 
 		for (User theUser : users) {
 			System.out.println("theUser:" + theUser.getUserN());
 			System.out.println("thepassword:" + theUser.getPassword());
-//			if (theUser.getUserN().equals(userNLog.getText()) && theUser.getPassword().equals(passwLog.getText())) {
-//				System.out.println("it works");
 
-				 if (!theUser.getUserN().equals(userNLog.getText())) {
-				 System.out.println("nope, username does not exist");
-				 Alert alert = new Alert(AlertType.ERROR);
-				 alert.setTitle("Error Dialog");
-				 alert.setHeaderText("Username ");
-				 alert.setContentText("Wrong Username or does not exist.");
-				 alert.showAndWait();
-				 } else if (!theUser.getPassword().equals(passwLog.getText())) {
-				 Alert alert = new Alert(AlertType.ERROR);
-				 alert.setTitle("Error Dialog");
-				 alert.setHeaderText("Password ");
-				 alert.setContentText("Wrong password or does not exist.");
-				 alert.showAndWait();
-				 } else {
-				 Alert alert = new Alert(AlertType.INFORMATION);
-				 alert.setTitle("Information Dialog");
-				 alert.setHeaderText("Welcome ");
-				 alert.setContentText("Have a nice day.");
-				 alert.showAndWait();
+			// goes through the list if the username and password is correct
+			if (theUser.getUserN().equals(userNLog.getText()) && theUser.getPassword().equals(passwLog.getText())) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText("Welcome ");
+				alert.setContentText("Have a nice day.");
+				alert.showAndWait();
+			} else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Wrong information ");
+				alert.setContentText("Wrong password or Username.");
+				alert.showAndWait();
+
 			}
 		}
-		// }
-
-		// System.out.println();
 	}
 
 	public void signUpLinkHandle() {
@@ -103,6 +94,7 @@ public class LogInController extends Application {
 
 	}
 
+	// using arraylist to store information
 	public static List<User> getUsers() {
 		return users;
 	}

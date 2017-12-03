@@ -82,8 +82,9 @@ public class SignUpController {
 		email.setText("getHelp@mail.com");
 		password.setText("P@ssw0rd123");
 		confirmPassword.setText("P@ssw0rd123");
-		userName.setText("user1");
-
+		int x = 1;
+		userName.setText("user" + x);
+		x++;
 		return null;
 
 	}
@@ -318,11 +319,10 @@ public class SignUpController {
 		User user = new User(userName.getText(), password.getText());
 		user.setPerson(person);
 		user.setEmail(email.getText());
-		// user.setPhone(phoneNum.getText());
+	
 		user.setPhoto(photo.toString());
 		user.setPhone(phoneNum.getText());
-		user.setPassword(password.getText()); // more here
-		//UserList.getUserList().add(user);
+		user.setPassword(password.getText()); 
 		if (userIsInTheList(user)) {
 			System.out.println("You got a duplicate.");
 		} else {
@@ -338,7 +338,7 @@ public class SignUpController {
 
 	}
 
-	// befoer go to loop add
+	
 	private void addUserToTheList(User newUser) {
 		System.out.println("added user: " + newUser.getUserN());
 		LogInController.getUsers().add(newUser);
