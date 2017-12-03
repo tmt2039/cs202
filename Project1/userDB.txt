@@ -1,0 +1,11 @@
+User(email='getHelp@mail.com'
+, userN='user1'
+, password='P@ssw0rd123'
+, photo=' C:\Users\Administrator\Pictures\Capture.PNG'
+, phone='123-123-1231}
+Person{
+firstN='John', 
+lastN='Smith', 
+gender='m', 
+SSN= 123-123-1231, 
+DOB= 1985-12-25}

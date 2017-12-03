@@ -1,4 +1,7 @@
 import javafx.event.ActionEvent;
+
+import java.awt.Button;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -60,16 +63,33 @@ public class SignUpController {
 
 	@FXML
 	String photo;
+	@FXML
+	Button logInHandle;
 
 	Stage signupStage = null;
 
 	private static final String FILENAME = "C:\\cs202\\Project1\\userDB.txt";
 	private static FileChooser fileChooser = new FileChooser();
-	private static List<User> users = new ArrayList<User>();
+
 	private static List<Person> person = new ArrayList<Person>();
 
+	public User testUser() {
+		firstName.setText("John");
+		lastName.setText("Smith");
+		gender.setText("m");
+		phoneNum.setText("123-123-1231");
+		sSN.setText("123-123-1231");
+		email.setText("getHelp@mail.com");
+		password.setText("P@ssw0rd123");
+		confirmPassword.setText("P@ssw0rd123");
+		userName.setText("user1");
+
+		return null;
+
+	}
+
 	public SignUpController() {
-		System.out.println("Constructor ....");
+		// System.out.println("Constructor ....");
 		// Delete the FILENAME
 		File file = new File(FILENAME);
 		file.delete();
@@ -278,9 +298,10 @@ public class SignUpController {
 	}
 
 	public void signUpButtonHandle() {
+		testUser();
 		System.out.println("signing up ...");
 
-		System.out.println("users: " + users.size());
+		System.out.println("users: " + LogInController.getUsers().size());
 
 		firstNameChecker();
 		genderChecker();
@@ -301,23 +322,31 @@ public class SignUpController {
 		user.setPhoto(photo.toString());
 		user.setPhone(phoneNum.getText());
 		user.setPassword(password.getText()); // more here
-		UserList.getUserList().add(user);
+		//UserList.getUserList().add(user);
 		if (userIsInTheList(user)) {
 			System.out.println("You got a duplicate.");
 		} else {
 			addUserToTheList(user);
 			writeTheUserToTheFile(user);
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("New Account");
+			alert.setHeaderText("Welcome");
+			alert.setContentText(firstName.getText() + " " + lastName.getText() + ", your username is: "
+					+ userName.getText() + "and your password is: " + password.getText());
+			alert.showAndWait();
 		}
 
 	}
 
+	// befoer go to loop add
 	private void addUserToTheList(User newUser) {
-		users.add(newUser);
+		System.out.println("added user: " + newUser.getUserN());
+		LogInController.getUsers().add(newUser);
 	}
 
 	private boolean userIsInTheList(User newUser) {
 		boolean duplicated = false;
-		for (User theUser : users) {
+		for (User theUser : LogInController.getUsers()) {
 			if (theUser.getUserN().equals(userName.getText())) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Dialog");
@@ -383,21 +412,34 @@ public class SignUpController {
 
 	}
 
-	public void loginLinkHandle(ActionEvent actionEvent) throws Exception {
-		try {
-			// FXMLLoader loader = new
-			// FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
-			//
-			// Parent root = loader.load();
-			Parent root = FXMLLoader.load(getClass().getResource("Log_in_page_SB.fxml"));
-			Stage logInStage = (Stage) (((Stage) (actionEvent.getSource())).getScene().getWindow());
+	public void loginLinkHandle() throws Exception {
+		Stage logInStage = new Stage();
 
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
+			Parent root = loader.load();
 			logInStage.setTitle("LogIn Page");
 			logInStage.setScene(new Scene(root));
 			logInStage.show();
 		} catch (IOException ioe) {
 			System.out.println(ioe.getMessage());
 		}
+
+		// try {
+		// // FXMLLoader loader = new
+		// // FXMLLoader(getClass().getResource("Log_in_page_SB.fxml"));
+		// //
+		// // Parent root = loader.load();
+		// Parent root = FXMLLoader.load(getClass().getResource("Log_in_page_SB.fxml"));
+		// Stage logInStage = (Stage) (((Stage) (Node)
+		// (e.getSource())).getScene().getWindow());
+		//
+		// logInStage.setTitle("LogIn Page");
+		// logInStage.setScene(new Scene(root));
+		// logInStage.show();
+		// } catch (IOException ioe) {
+		// System.out.println(ioe.getMessage());
+		// }
 
 	}
 }
