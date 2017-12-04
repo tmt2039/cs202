@@ -1,13 +1,12 @@
 //package dataStructure;
 //
-//import exceptions.Underflow;
+//
 //
 //public class LinkedListStack<data> implements InterfaceList<data> {
 //
 //    private LinkedListNodes<data> top;
 //    private int numElement = 0;
 //
-//    @Override
 //    public data top() throws Underflow {
 //        if (isEmpty()) {
 //            throw new Underflow("Stack is empty. Cannot top()");
@@ -15,7 +14,7 @@
 //        return top.getElement();
 //    }
 //
-//    @Override
+//
 //    public data pop() throws Underflow {
 //        if (isEmpty()) {
 //            throw new Underflow("Stack is empty. Cannot pop()");
@@ -25,7 +24,7 @@
 //        return element;
 //    }
 //
-//    @Override
+//
 //    public void push(data element) {
 //        LinkedListNodes<data> newNode = new LinkedListNodes<data>(element);
 //        newNode.setPointer(top);
@@ -33,17 +32,16 @@
 //        numElement++;
 //    }
 //
-//    @Override
+//
 //    public boolean isEmpty() {
 //        return (numElement == 0);
 //    }
 //
-//    @Override
 //    public boolean isFull() {
 //        return false;
 //    }
 //
-//    @Override
+//
 //    public int size() {
 //        return numElement;
 //    }
