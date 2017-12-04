@@ -16,10 +16,10 @@ public abstract class AbstractList<E> implements List<E> {
 		add(size, e);
 	}
 
-	@Override 
-	 public boolean isEmpty() {
-	 return size == 0;
-	 }
+	@Override
+	public boolean isEmpty() {
+		return size == 0;
+	}
 
 	@Override
 	public int size() {

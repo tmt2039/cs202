@@ -63,7 +63,9 @@ public class User {
 	public void setPerson(Person person) {
 		this.person = person;
 	}
-
+	public int compareTo(Object o) {
+        return 0;
+    }
 	
 
 	

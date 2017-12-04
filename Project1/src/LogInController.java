@@ -3,8 +3,10 @@ import java.awt.Component;
 import java.io.IOException;
 
 // using arraylist to store information
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
+
+import dataStructure.LinkedList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.application.Application;
@@ -32,7 +34,7 @@ public class LogInController extends Application {
 
 	private Stage signUpStage;
 
-	private static List<User> users = new ArrayList<User>();
+	private static LinkedList<User> users = new LinkedList<User>();
 
 	public void start(Stage stage) {
 
@@ -95,7 +97,7 @@ public class LogInController extends Application {
 	}
 
 	// using arraylist to store information
-	public static List<User> getUsers() {
+	public static LinkedList<User> getUsers() {
 		return users;
 	}
 }

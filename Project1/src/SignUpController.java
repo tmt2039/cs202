@@ -6,12 +6,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.soap.Node;
 
+import dataStructure.LinkedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -71,7 +72,7 @@ public class SignUpController {
 	private static final String FILENAME = "C:\\cs202\\Project1\\userDB.txt";
 	private static FileChooser fileChooser = new FileChooser();
 
-	private static List<Person> person = new ArrayList<Person>();
+	private static LinkedList<Person> person = new LinkedList<Person>();
 
 	public User testUser() {
 		firstName.setText("John");
@@ -80,11 +81,12 @@ public class SignUpController {
 		phoneNum.setText("123-123-1231");
 		sSN.setText("123-123-1231");
 		email.setText("getHelp@mail.com");
-		password.setText("P@ssw0rd123");
-		confirmPassword.setText("P@ssw0rd123");
-		int x = 1;
-		userName.setText("user" + x);
-		x++;
+		password.setText("P@ssword123");
+		confirmPassword.setText("P@ssword123");
+		//int x = 1;
+		userName.setText("user" );
+		//x++;
+//		birthdate.setValue(null).toString("11/24/1987");
 		return null;
 
 	}

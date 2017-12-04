@@ -109,4 +109,8 @@ public class Person {
 		return "Person{" + "\nfirstN='" + firstN + '\'' + ", \nlastN='" + lastN + '\'' + ", \ngender='" + gender + '\''
 				+ ", \nSSN= " + sSN + ", \nDOB= " + dOB + '}';
 	}
+
+    public int compareTo(Object o) {
+        return 0;
+    }
 }
