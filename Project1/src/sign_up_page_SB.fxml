@@ -22,23 +22,23 @@
       <TextField fx:id="gender" layoutX="407.0" layoutY="153.0" prefHeight="31.0" prefWidth="28.0" />
       <Label layoutX="321.0" layoutY="111.0" text="Birthday" />
       <Label layoutX="29.0" layoutY="207.0" text="Email" />
-      <TextField fx:id="email" layoutX="101.0" layoutY="203.0" prefHeight="25.0" prefWidth="165.0" promptText="include @mail" />
+      <TextField fx:id="email" layoutX="98.0" layoutY="203.0" prefHeight="25.0" prefWidth="165.0" promptText="include @mail" />
       <TextField fx:id="phoneNum" layoutX="98.0" layoutY="144.0" prefHeight="31.0" prefWidth="152.0" promptText="555-555-555" />
       <Label layoutX="10.0" layoutY="151.0" text="Phone Number" />
       <Label layoutX="342.0" layoutY="207.0" text="Username" />
       <TextField fx:id="userName" layoutX="426.0" layoutY="203.0" prefHeight="25.0" prefWidth="231.0" />
-      <Label layoutX="245.0" layoutY="248.0" prefHeight="30.0" prefWidth="159.0" text="password requirement:" textAlignment="CENTER">
+      <Label layoutX="245.0" layoutY="370.0" prefHeight="30.0" prefWidth="159.0" text="password requirement:" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Text layoutX="287.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 number" />
-      <Text layoutX="268.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 lowercase letter" />
-      <Text layoutX="266.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 Uppercase letter" />
-      <Text layoutX="265.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 special character" />
-      <PasswordField fx:id="password" layoutX="106.0" layoutY="427.0" promptText="password" />
-      <PasswordField fx:id="confirmPassword" layoutX="407.0" layoutY="427.0" promptText="confirm password" />
-      <Label layoutX="47.0" layoutY="431.0" text="Password" />
-      <Label layoutX="305.0" layoutY="431.0" text="Confirm Password" />
+      <Text layoutX="295.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 number" />
+      <Text layoutX="274.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 lowercase letter" />
+      <Text layoutX="272.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 Uppercase letter" />
+      <Text layoutX="272.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 special character" />
+      <PasswordField fx:id="password" layoutX="122.0" layoutY="512.0" promptText="password" />
+      <PasswordField fx:id="confirmPassword" layoutX="467.0" layoutY="512.0" promptText="confirm password" />
+      <Label layoutX="33.0" layoutY="516.0" text="Password" />
+      <Label layoutX="356.0" layoutY="516.0" text="Confirm Password" />
       
       <Button layoutX="314.0" layoutY="551.0" mnemonicParsing="false" onAction="#signUpButtonHandle" text="sign up" />
       <Button layoutX="548.0" layoutY="165.0" mnemonicParsing="false" onAction="#browseButtonHandle" text="Browse" />      
@@ -46,6 +46,14 @@
       <Hyperlink layoutX="324.0" layoutY="592.0" onAction="#loginLinkHandle" text="log in" />
       <DatePicker fx:id="birthdate" layoutX="398.0" layoutY="101.0" prefHeight="31.0" prefWidth="205.0" />
       <Label layoutX="504.0" layoutY="145.0" text="choose a profile picture (.jpg)" />
-      <Label layoutX="289.0" layoutY="379.0" text="8 minmium " />
+      <Label layoutX="289.0" layoutY="474.0" text="8 minmium " />
+      <Label layoutX="29.0" layoutY="252.0" text="Address" />
+      <TextField fx:id="address" layoutX="91.0" layoutY="248.0" prefHeight="25.0" prefWidth="568.0" />
+      <Label layoutX="23.0" layoutY="290.0" text="City" />
+      <TextField fx:id="city" layoutX="58.0" layoutY="286.0" />
+      <Label layoutX="257.0" layoutY="290.0" text="State" />
+      <Label layoutX="467.0" layoutY="290.0" text="Zipcode" />
+      <TextField fx:id="zipcode" layoutX="523.0" layoutY="286.0" promptText="78957" />
+      <TextField fx:id="state" layoutX="293.0" layoutY="286.0" />
    </children>
 </AnchorPane>

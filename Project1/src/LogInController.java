@@ -96,7 +96,7 @@ public class LogInController extends Application {
 
 	}
 
-	// using arraylist to store information
+// using arraylist to store information
 	public static LinkedList<User> getUsers() {
 		return users;
 	}
