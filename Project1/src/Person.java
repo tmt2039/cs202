@@ -5,7 +5,9 @@ public class Person {
 
 	public String firstN, lastN, gender, sSN, dOB;
 
-	public String city, address, state, zip, location;
+	public String city, address, state, zip, location, longatitude, lattuide;
+	
+	
 
 	public Person() {
 
@@ -24,6 +26,14 @@ public class Person {
 		this.sSN = sSN;
 		this.dOB = dOB;
 
+	}
+	
+	public void location(String longatitude, String lattuide) {
+		this.longatitude = longatitude;
+		this.lattuide = lattuide;
+	}
+	public void Person(String location) {
+		this.location = location;
 	}
 
 	public String getCity() {

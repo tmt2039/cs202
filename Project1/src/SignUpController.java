@@ -1,16 +1,13 @@
-import javafx.event.ActionEvent;
-
 import java.awt.Button;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.StringTokenizer;
 //import java.util.ArrayList;
 //import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.soap.Node;
 
 import dataStructure.LinkedList;
 import javafx.fxml.FXML;
@@ -22,7 +19,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ChoiceBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -75,7 +71,7 @@ public class SignUpController {
 
 	Stage signupStage = null;
 
-	private static final String FILENAME = "C:\\cs202\\Project1\\userDB.txt";
+	private static final String FILENAME = "C:\\cs202\\Project1\\userDB.cvs";
 	private static FileChooser fileChooser = new FileChooser();
 
 	private static LinkedList<Person> person = new LinkedList<Person>();
@@ -91,7 +87,7 @@ public class SignUpController {
 		confirmPassword.setText("P@ssword123");
 		state.setText("California");
 		userName.setText("user");
-		address.setText("12345 CandyLane St");
+		address.setText("12345 123th St");
 		city.setText("Gotham");
 		zipcode.setText("89679");
 		// x++;
@@ -164,57 +160,46 @@ public class SignUpController {
 	}
 
 	public boolean cityChecker(boolean checker) {
-		//boolean checker;
-		String letters = "[a-zA-z]+";
-		Pattern checkLetter = Pattern.compile(city.getText());
-		Matcher regexMatcher = checkLetter.matcher(letters);
-		if (city == null || city.equals("")) {
+		String regex = "[A-Z a-z]+";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher regexMatcher = pattern.matcher(city.getText());
+		if (!regexMatcher.matches()) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
-			alert.setHeaderText("Empty");
-			alert.setContentText("Please type in your city");
+			alert.setHeaderText("City name");
+			alert.setContentText("No numbers or special characters.");
 			alert.showAndWait();
-			checker = false;
-		} else if (!city.getText().contains(letters)) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error Dialog");
-			alert.setHeaderText("City");
-			alert.setContentText("No numbers or special characters .");
-
-			alert.showAndWait();
-			checker = false;
-		} else {
-			checker = true;
+			return false;
 		}
-		return checker;
+		return true;
 	}
 
-	 public boolean addressChecker(boolean checker) {
-	 // boolean checker;
-	 String letters = "[a-zA-z]+";
-	 String numbers = "(?=.*\\\\d)";
-	 Pattern checkLetter = Pattern.compile(address.getText());
-	 Matcher regexMatcher = checkLetter.matcher(letters);
-	 if (address == null || address.equals("")) {
-	 Alert alert = new Alert(AlertType.ERROR);
-	 alert.setTitle("Error Dialog");
-	 alert.setHeaderText("Empty");
-	 alert.setContentText("Please type in your address");
-	 alert.showAndWait();
-	 checker = false;
-	 } else if (!city.getText().contains(letters)) {
-	 Alert alert = new Alert(AlertType.ERROR);
-	 alert.setTitle("Error Dialog");
-	 alert.setHeaderText("Adress");
-	 alert.setContentText("Example: 12345 Candylane St.");
-	
-	 alert.showAndWait();
-	 checker = false;
-	 } else {
-	 checker = true;
-	 }
-	 return checker;
-	 }
+	public boolean addressChecker(boolean checker) {
+		String[] tokens = address.getText().split(" ");
+		
+		if (!Pattern.matches("\\d+", tokens[0])) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Street number");
+			alert.setContentText("Incorrect street number.");
+			alert.showAndWait();
+			return false;
+		}
+		
+		// street name cannot be number.
+		for (int i = 1; i < tokens.length; i++) {
+			if (Pattern.matches("\\d+", tokens[i])) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Street name");
+				alert.setContentText("Incorrect street name.");
+				alert.showAndWait();
+				return false;
+			}
+		}
+
+		return true;
+	}
 
 	public boolean genderChecker(boolean checker) {
 
@@ -283,22 +268,11 @@ public class SignUpController {
 	}
 
 	public boolean sSNChecker(boolean checker) {
-		// boolean checker;
-		String letters = "[A-Z a-z]";
-		Pattern checkLetter = Pattern.compile(sSN.getText());
-		Matcher regexMatcher = checkLetter.matcher(letters);
-		if (sSN.getText().contains(letters)) {
+		if (!Pattern.matches("^\\d{3}-\\d{3}-\\d{4}$", sSN.getText())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Has letters in it");
 			alert.setContentText("SSN only has numbers");
-			alert.showAndWait();
-			checker = false;
-		} else if (sSN.getText().length() > 12 || sSN.getText().length() < 12) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error Dialog");
-			alert.setHeaderText("Not the right amount number");
-			alert.setContentText("SSN format is: ###-###-####");
 			alert.showAndWait();
 			checker = false;
 		} else {
@@ -333,74 +307,70 @@ public class SignUpController {
 
 	}
 
-	 public boolean zipcodeChecker(boolean checker) {
-	
-	 String letters = "[A-Z a-z]";
-	 Pattern checkLetter = Pattern.compile(zipcode.getText());
-	 Matcher regexMatcher = checkLetter.matcher(letters);
-	 if (zipcode.getText().contains(letters)) {
-	 Alert alert = new Alert(AlertType.ERROR);
-	 alert.setTitle("Error Dialog");
-	 alert.setHeaderText("Has letters in it");
-	 alert.setContentText("Zipcodes only has numbers");
-	 alert.showAndWait();
-	 checker = false;
-	 } else if (zipcode.getText().length() > 5 || zipcode.getText().length() < 5)
-	 {
-	 Alert alert = new Alert(AlertType.ERROR);
-	 alert.setTitle("Error Dialog");
-	 alert.setHeaderText("Not the right amount number");
-	 alert.setContentText("zipcodes format is: #####");
-	 alert.showAndWait();
-	 checker = false;
-	 } else {
-	 checker = true;
-	 }
-	 return checker;
-	 }
+	public boolean zipcodeChecker(boolean checker) {
 
-	 public boolean stateChecker(boolean checker) {
-	
-	 String states = "Alabama\r\n" + "Alaska\r\n" + "Arizona\r\n" +
-	 "Arkansas\r\n" + "California\r\n"
-	 + "Colorado\r\n" + "Connecticut\r\n" + "Delaware\r\n" + "Florida\r\n" +
-	 "Georgia\r\n" + "Hawaii\r\n"
-	 + "Idaho\r\n" + "Illinois\r\n" + "Indiana\r\n" + "Iowa\r\n" + "Kansas\r\n" +
-	 "Kentucky\r\n"
-	 + "Louisiana\r\n" + "Maine\r\n" + "Maryland\r\n" + "Massachusetts\r\n" +
-	 "Michigan\r\n"
-	 + "Minnesota\r\n" + "Mississippi\r\n" + "Missouri\r\n" + "Montana\r\n" +
-	 "Nebraska\r\n" + "Nevada\r\n"
-	 + "New Hampshire\r\n" + "New Jersey\r\n" + "New Mexico\r\n" + "New York\r\n"
-	 + "North Carolina\r\n"
-	 + "North Dakota\r\n" + "Ohio\r\n" + "Oklahoma\r\n" + "Oregon\r\n" +
-	 "Pennsylvania\r\n"
-	 + "Rhode Island\r\n" + "South Carolina\r\n" + "South Dakota\r\n" +
-	 "Tennessee\r\n" + "Texas\r\n"
-	 + "Utah\r\n" + "Vermont\r\n" + "Virginia\r\n" + "Washington\r\n" + "West Virginia\r\n" + "Wisconsin\r\n"
-	 + "Wyoming";
-	 if (!state.getText().contains((CharSequence) states)) {
-	 Alert alert = new Alert(AlertType.ERROR);
-	 alert.setTitle("Error Dialog");
-	 alert.setHeaderText("Here are the valid states: ");
-	 alert.setContentText("Alabama, Alaska, Arizona, Arkansas, California\r\n"
-	 + "Colorado, Connecticut, Delaware, Florida, Georgia\r\n"
-	 + "Hawaii, Idaho, Illinois, Indiana, Iowa\r\n" + "Kansas, Kentucky,Louisiana, Maine, Maryland\r\n"
-	 + "Massachusetts, Michigan, Minnesota, Mississippi, Missouri\r\n"
-	 + "Montana, Nebraska, Nevada, New Hampshire, New Jersey\r\n"
-	 + "New Mexico, New York, North Carolina, North Dakota\r\n"
-	 + "Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island\r\n"
-	 + "South Carolina, South Dakota, Tennessee, Texas, Utah\r\n"
-	 + "Vermont, Virginia, Washington, West Virginia, Wisconsin, Wyoming");
-	 alert.showAndWait();
-	 checker = false;
-	
-	 } else {
-	 checker = true;
-	 }
-	 return checker;
-	
-	 }
+		String letters = "[A-Z a-z]";
+		Pattern checkLetter = Pattern.compile(zipcode.getText());
+		Matcher regexMatcher = checkLetter.matcher(letters);
+		if (zipcode.getText().contains(letters)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Has letters in it");
+			alert.setContentText("Zipcodes only has numbers");
+			alert.showAndWait();
+			checker = false;
+		} else if (zipcode.getText().length() > 5 || zipcode.getText().length() < 5) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Not the right amount number");
+			alert.setContentText("zipcodes format is: #####");
+			alert.showAndWait();
+			checker = false;
+		} else {
+			checker = true;
+		}
+		return checker;
+	}
+
+	public boolean stateChecker(boolean checker) {
+		String[] states = { "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+				"Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas",
+				"Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+				"Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
+				"North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island",
+				"South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
+				"West Virginia", "Wisconsin", "Wyoming" };
+
+		boolean found = false;
+
+		for (String theState : states) {
+			if (theState.equalsIgnoreCase(state.getText())) {
+				found = true;
+			}
+		}
+
+		if (!found) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Here are the valid states: ");
+			alert.setContentText("Alabama, Alaska, Arizona, Arkansas, California\r\n"
+					+ "Colorado, Connecticut, Delaware, Florida, Georgia\r\n"
+					+ "Hawaii, Idaho, Illinois, Indiana, Iowa\r\n" + "Kansas, Kentucky,Louisiana, Maine, Maryland\r\n"
+					+ "Massachusetts, Michigan, Minnesota, Mississippi, Missouri\r\n"
+					+ "Montana, Nebraska, Nevada, New Hampshire, New Jersey\r\n"
+					+ "New Mexico, New York, North Carolina, North Dakota\r\n"
+					+ "Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island\r\n"
+					+ "South Carolina, South Dakota, Tennessee, Texas, Utah\r\n"
+					+ "Vermont, Virginia, Washington, West Virginia, Wisconsin, Wyoming");
+			alert.showAndWait();
+			checker = false;
+
+		} else {
+			checker = true;
+		}
+		return checker;
+
+	}
 
 	public boolean passwordChecker(boolean checker) {
 
@@ -447,11 +417,11 @@ public class SignUpController {
 		genderChecker(checker);
 		emailChecker(checker);
 		sSNChecker(checker);
-		 addressChecker(checker);
+		addressChecker(checker);
 		phoneNumberChecker(checker);
 		passwordChecker(checker);
 		confirmPasswordChecker(checker);
-		 zipcodeChecker(checker);
+		zipcodeChecker(checker);
 		birthDate();
 		// if (checker != true) {
 		Person person = new Person(firstName.getText(), lastName.getText(), gender.getText(), sSN.getText(),
@@ -469,6 +439,7 @@ public class SignUpController {
 		if (userIsInTheList(user)) {
 			System.out.println("You got a duplicate.");
 		} else {
+
 			addUserToTheList(user);
 			writeTheUserToTheFile(user);
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -486,6 +457,21 @@ public class SignUpController {
 		// alert.showAndWait();
 		// }
 
+	}
+
+	private void StringTokenizer(User user) {
+		String example = "First Name Last Name Gender SSN Birthday City	Address	ZipCode	State Email	UserName Password";
+		StringTokenizer userList = new StringTokenizer(example);
+		String firstN = userList.nextToken();
+		// String zipcode = String.substring(userList.nextToken());
+		boolean validity = Boolean.parseBoolean(userList.nextToken());
+		if (validity) {
+			System.out.println(example);
+			System.out.println(user.toString());
+			System.out.println(user.getPerson().toString());
+			// System.out.println(zipcode);
+		} else
+			System.out.println("invalid string");
 	}
 
 	private void addUserToTheList(User newUser) {
@@ -527,11 +513,14 @@ public class SignUpController {
 
 		try {
 
-			bw = new BufferedWriter(new FileWriter(FILENAME, true)); // true mean to append at the end of the file
+			// bw = new BufferedWriter(new FileWriter(FILENAME, true)); // true mean to
+			// append at the end of the file
+			bw = new BufferedWriter(new FileWriter(FILENAME, true));
 			bw.write(newUser.toString());
 			bw.write("\r\n");
 			bw.write(newUser.getPerson().toString());
 			bw.write("\r\n");
+			// bw.write("UserDB.xlsx");
 
 		} catch (IOException e) {
 			System.out.println("Error in opening or writing file.");

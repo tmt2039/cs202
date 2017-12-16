@@ -1,16 +1,15 @@
 User(email='getHelp@mail.com'
 , userN='user'
 , password='P@ssword123'
-, photo=' C:\Users\Administrator\Pictures\auntumn landscape.jpg'
+, photo=' C:\Users\Administrator\Pictures\Capture.JPG'
 , phone='123-123-1231}
 Person{
 firstN='John', 
 lastN='Smith', 
 gender='m', 
 SSN= 123-123-1231, 
-DOB= 2017-11-27, 
-Address=12345 CandyLane St, 
+DOB= 2017-12-04, 
+Address=12345 123th St, 
 City=Gotham, 
 State=California, 
 ZipCode=89679}
-UserDB.xlsx
